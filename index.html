@@ -88,12 +88,12 @@
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicljitigmj20zk0m87fp.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicitzannuj20zk0m8b29.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipew28b65j20zk0m8hdt.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclgrvbd6j20zk0m8qv5.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclhfehz7j20zk0m8u0x.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeu1usa7j20zk0m8b29.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclil3m4ej20zk0m8tn8.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclxfdlttj20zk0m8npd.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclfb3vzhj20zk0m8wny.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclj61ylzj20zk0m8b29.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicit31ffoj20zk0m8naf.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclxxcb6rj20zk0m8b29.jpg"></li>
         </ul>
       </div>
     </header>
@@ -120,7 +120,35 @@
         
 <article class="item">
   <div class="cover">
-    <a href="/2023/07/27/hello-world/" itemprop="url" title="Hello World"><img data-src="https://tva3.sinaimg.cn/mw690/6833939bly1giciusoyjnj219g0u0x56.jpg"></a>
+    <a href="/2023/07/27/m2sPipe%E4%B8%8Es2mPipe/" itemprop="url" title="m2sPipe与s2mPipe"><img data-src="https://tva3.sinaimg.cn/mw690/6833939bly1gicitf0kl1j20zk0m87fe.jpg"></a>
+  </div>
+  <div class="info">
+    
+<div class="meta">
+  <span class="item" title="Created: 2023-07-27 15:21:12">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <time itemprop="dateCreated datePublished" datetime="2023-07-27T15:21:12+08:00">2023-07-27</time>
+  </span>
+</div>
+
+    <h3><a href="/2023/07/27/m2sPipe%E4%B8%8Es2mPipe/" itemprop="url" title="m2sPipe与s2mPipe">m2sPipe与s2mPipe</a></h3>
+    <div class="excerpt">
+        s2mPipekey: self.ready为s2mPipe.ready打一拍，rValid和rData用于寄存输入valid和payload避免气泡.
+如果有寄存数据，输出寄存数据；如果没有寄存数据，寄存数据 or 直接输出（视输出ready决定）
+val rData &amp;#x3D; RegNextWhen(self.payload, self.fire &amp;amp; ~s2mPipe.fire)
+val rValid &amp;#x3D; RegInit(False) setWhen(self.fire) clearWhen(s2mPipe.fire)
+val rReady...
+    </div>
+    <a href="/2023/07/27/m2sPipe%E4%B8%8Es2mPipe/" itemprop="url" title="m2sPipe与s2mPipe" class="btn">more...</a>
+  </div>
+</article>
+
+        
+<article class="item">
+  <div class="cover">
+    <a href="/2023/07/27/hello-world/" itemprop="url" title="Hello World"><img data-src="https://tva3.sinaimg.cn/mw690/6833939bly1giclgrvbd6j20zk0m8qv5.jpg"></a>
   </div>
   <div class="info">
     
@@ -175,8 +203,14 @@ Run server$...
 <nav class="state">
     <div class="item posts">
       <a href="/archives/">
-        <span class="count">1</span>
+        <span class="count">2</span>
         <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">1</span>
+        <span class="name">tags</span>
       </a>
     </div>
 </nav>
@@ -227,6 +261,15 @@ Run server$...
 </div>
 
     <span><a href="/2023/07/27/hello-world/" title="Hello World">Hello World</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2023/07/27/m2sPipe%E4%B8%8Es2mPipe/" title="m2sPipe与s2mPipe">m2sPipe与s2mPipe</a></span>
   </li>
 
   </ul>
