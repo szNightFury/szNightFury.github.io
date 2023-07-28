@@ -2,13 +2,14 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://nightfury.top</id>
     <title>NightFury</title>
-    <subtitle></subtitle>
+    <subtitle>=行动胜于空想=</subtitle>
     <icon>http://nightfury.top/images/favicon.ico</icon>
     <link href="http://nightfury.top" />
     <author>
       <name>NightFury</name>
     </author>
     <updated>2023-07-27T07:21:12.000Z</updated>
+    <category term="FPGA，SpinalHDL，CNN，SNN，Accelerator，Technique" />
     <entry>
         <id>http://nightfury.top/2023/07/27/m2sPipe%E4%B8%8Es2mPipe/</id>
         <title>m2sPipe与s2mPipe</title>

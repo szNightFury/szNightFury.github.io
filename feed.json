@@ -1,9 +1,9 @@
 {
     "version": "https://jsonfeed.org/version/1",
     "title": "NightFury",
-    "subtitle": "",
+    "subtitle": "=行动胜于空想=",
     "icon": "http://nightfury.top/images/favicon.ico",
-    "description": "",
+    "description": "记录一些个人笔记，踩坑记录等",
     "home_page_url": "http://nightfury.top",
     "items": [
         {

@@ -2,16 +2,17 @@
 <rss version="2.0">
     <channel>
         <title>NightFury</title>
-        <subtitle></subtitle>
+        <subtitle>=行动胜于空想=</subtitle>
         <icon>http://nightfury.top/images/favicon.ico</icon>
         <link>http://nightfury.top</link>
         <author>
           <name>NightFury</name>
         </author>
-        <description></description>
+        <description>记录一些个人笔记，踩坑记录等</description>
         <language>zh-CN</language>
         <pubDate>Thu, 27 Jul 2023 15:21:12 +0800</pubDate>
         <lastBuildDate>Thu, 27 Jul 2023 15:21:12 +0800</lastBuildDate>
+        <category term="FPGA，SpinalHDL，CNN，SNN，Accelerator，Technique" />
         <item>
             <guid isPermalink="true">http://nightfury.top/2023/07/27/m2sPipe%E4%B8%8Es2mPipe/</guid>
             <title>m2sPipe与s2mPipe</title>
