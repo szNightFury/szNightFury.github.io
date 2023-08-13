@@ -10,9 +10,22 @@
         </author>
         <description>个人笔记 &amp; 踩坑记录 &amp; 各种收藏</description>
         <language>zh-CN</language>
-        <pubDate>Sun, 13 Aug 2023 18:16:24 +0800</pubDate>
-        <lastBuildDate>Sun, 13 Aug 2023 18:16:24 +0800</lastBuildDate>
+        <pubDate>Sun, 13 Aug 2023 20:38:10 +0800</pubDate>
+        <lastBuildDate>Sun, 13 Aug 2023 20:38:10 +0800</lastBuildDate>
         <category term="FPGA，SpinalHDL，CNN，SNN，Accelerator，Technique" />
+        <item>
+            <guid isPermalink="true">http://nightfury.top/2023/08/13/Markdown%E5%9B%BE%E7%89%87%E9%85%8D%E7%BD%AE/</guid>
+            <title>Markdown图片配置</title>
+            <link>http://nightfury.top/2023/08/13/Markdown%E5%9B%BE%E7%89%87%E9%85%8D%E7%BD%AE/</link>
+            <category term="Configuration" scheme="http://nightfury.top/categories/Configuration/" />
+            <category term="Hexo" scheme="http://nightfury.top/tags/Hexo/" />
+            <category term="Shoka" scheme="http://nightfury.top/tags/Shoka/" />
+            <category term="Markdown" scheme="http://nightfury.top/tags/Markdown/" />
+            <category term="Typora" scheme="http://nightfury.top/tags/Typora/" />
+            <pubDate>Sun, 13 Aug 2023 20:38:10 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;测试&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">http://nightfury.top/2023/08/13/sbt%E7%BC%93%E5%AD%98%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE/</guid>
             <title>sbt缓存目录配置</title>
