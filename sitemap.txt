@@ -1,7 +1,7 @@
-http://nightfury.top/2023/08/13/Markdown%20%E5%9B%BE%E7%89%87%E9%85%8D%E7%BD%AE/
-http://nightfury.top/2023/08/13/sbt%20%E7%BC%93%E5%AD%98%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE/
+http://nightfury.top/2023/08/13/Markdown%E5%9B%BE%E7%89%87%E9%85%8D%E7%BD%AE/
+http://nightfury.top/2023/08/13/sbt%E7%BC%93%E5%AD%98%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE/
 http://nightfury.top/2023/07/27/HelloWorld/
-http://nightfury.top/2023/07/27/m2sPipe%20%E4%B8%8E%20s2mPipe/
+http://nightfury.top/2023/07/27/m2sPipe%E4%B8%8Es2mPipe/
 http://nightfury.top/
 http://nightfury.top/tags/Hexo/
 http://nightfury.top/tags/Shoka/
