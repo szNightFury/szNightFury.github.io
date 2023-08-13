@@ -14,7 +14,15 @@
         <id>http://nightfury.top/2023/08/13/Markdown%E5%9B%BE%E7%89%87%E9%85%8D%E7%BD%AE/</id>
         <title>Markdown图片配置</title>
         <link rel="alternate" href="http://nightfury.top/2023/08/13/Markdown%E5%9B%BE%E7%89%87%E9%85%8D%E7%BD%AE/"/>
-        <content type="html">&lt;p&gt;测试&lt;/p&gt;
+        <content type="html">&lt;h1 id=&#34;hexo&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#hexo&#34;&gt;#&lt;/a&gt; Hexo&lt;/h1&gt;
+&lt;p&gt;第一次使用 Hexo，对于 Markdown 中图片的处理不是很了解。由于 Markdown 中插入的图片多为本地或者网络链接的形式，而经过 Hexo 编译后，网页是不可能获取到本地图片，因此往往需要做额外的处理，经了解有以下几种方案：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用网络链接。这需要网上资源有你需要的图片，或者使用图床等手动上传，但该方法由于图片掌握在他人手上并不稳定 / 安全，因此果断抛弃。&lt;/li&gt;
+&lt;li&gt;使用 base64 编码的方案。因为 Markdown 最后都会生成 html，因此可以将原本的  &lt;code&gt;![image](image_path)&lt;/code&gt;  这种写法改成  &lt;code&gt;![image](data:image/png:base64,...)&lt;/code&gt;  这种写法，这种写法不需要将图片存在任何除了这个文件以外的其它地方。但是，图片的  &lt;code&gt;base64&lt;/code&gt;  编码非常之长，直接插入文件中间会影响 Markdown 编写过程中的美观。不过其实也可以使用间接的方法，在需要插入图片的地方写  &lt;code&gt;![image][reference_name]&lt;/code&gt; ，在其他地方（最好是文章末尾）写  &lt;code&gt;[reference_name]:&amp;lt;base64&amp;gt;&lt;/code&gt; ，但个人觉得这种方式还是不够优雅。&lt;/li&gt;
+&lt;li&gt;使用本地图片，同时上传至服务器。Hexo 本身提供了解决方案 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3MvYXNzZXQtZm9sZGVycy5odG1s&#34;&gt;资源文件夹 | Hexo&lt;/span&gt; ，需要配合 hexo-asset-img 一同食用，该方案比较优雅，只需将图片保存到本地（配合 Typora），然后一键三连即可（后文附上一键三连代码）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;环境配置&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#环境配置&#34;&gt;#&lt;/a&gt; 环境配置&lt;/h1&gt;
+&lt;p&gt;如 Hexo 官方文档 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3MvYXNzZXQtZm9sZGVycy5odG1s&#34;&gt;资源文件夹 | Hexo&lt;/span&gt;&lt;/p&gt;
 </content>
         <category term="Configuration" scheme="http://nightfury.top/categories/Configuration/" />
         <category term="Hexo" scheme="http://nightfury.top/tags/Hexo/" />
@@ -28,11 +36,11 @@
         <title>sbt缓存目录配置</title>
         <link rel="alternate" href="http://nightfury.top/2023/08/13/sbt%E7%BC%93%E5%AD%98%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE/"/>
         <content type="html">&lt;h1 id=&#34;sbt文件迁移&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#sbt文件迁移&#34;&gt;#&lt;/a&gt; sbt 文件迁移&lt;/h1&gt;
-&lt;p&gt;sbt 原来的缓存路径为 C:\Users {Your User Name}\AppData\Local，里面包含了 .sbt 和 .ivy2 文件夹，在这里我将其迁移至 D:\sbt 路径下&lt;/p&gt;
+&lt;p&gt;sbt 原来的缓存路径为  &lt;code&gt;C:\Users\&amp;#123;Your User Name&amp;#125;\AppData\Local&lt;/code&gt; ，里面包含了 .sbt 和 .ivy2 文件夹，在这里我将其迁移至  &lt;code&gt;D:\sbt&lt;/code&gt;  路径下&lt;/p&gt;
 &lt;h1 id=&#34;intellij-idea&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#intellij-idea&#34;&gt;#&lt;/a&gt; IntelliJ IDEA&lt;/h1&gt;
 &lt;p&gt;打开 IntelliJ IDEA，依次打开 File - Settings - Build, Execution, Deployment - sbt，在 VM parameters 中输入：&lt;/p&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token parameter variable&#34;&gt;-Dsbt.boot.directionary&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;D:&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;sbt&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;.sbt&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;boot&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token parameter variable&#34;&gt;-Dsbt.global.base&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;D:&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;sbt&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;.sbt&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token parameter variable&#34;&gt;-Dsbt.ivy.home&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;D:&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;sbt&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;.ivy2&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;img data-src=&#34;/2023/08/13/sbt%E7%BC%93%E5%AD%98%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE/sbt%E7%BC%93%E5%AD%98%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE.png&#34; class=&#34;&#34; title=&#34;sbt缓存目录配置&#34;&gt;&lt;/p&gt;
-&lt;p&gt;至此，sbt 的缓存文件将会保存在 D 盘中，但由于当初安装 sbt 时似乎选择在了 C 盘，因此如有需要还可以对 sbt 进行迁移（似乎安装在了 C:\Users {Your User Name}\AppData\Local\Coursier\cache\arc\https\&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL2dpdGh1Yi5jb20=&#34;&gt;github.com&lt;/span&gt;\sbt 中），等后面有时间了再处理吧。&lt;/p&gt;
+&lt;p&gt;至此，sbt 的缓存文件将会保存在 D 盘中，但由于当初安装 sbt 时似乎选择在了 C 盘，因此如有需要还可以对 sbt 进行迁移（似乎安装在了  &lt;code&gt;C:\Users\&amp;#123;Your User Name&amp;#125;\AppData\Local\Coursier\cache\arc\https\github.com\sbt&lt;/code&gt;  中），等后面有时间了再处理吧。&lt;/p&gt;
 </content>
         <category term="Configuration" scheme="http://nightfury.top/categories/Configuration/" />
         <category term="IntelliJ IDEA" scheme="http://nightfury.top/tags/IntelliJ-IDEA/" />
@@ -77,9 +85,9 @@
         <updated>2023-07-27T07:21:12.000Z</updated>
     </entry>
     <entry>
-        <id>http://nightfury.top/2023/07/27/Hello_World/</id>
+        <id>http://nightfury.top/2023/07/27/HelloWorld/</id>
         <title>Hello World</title>
-        <link rel="alternate" href="http://nightfury.top/2023/07/27/Hello_World/"/>
+        <link rel="alternate" href="http://nightfury.top/2023/07/27/HelloWorld/"/>
         <content type="html">&lt;p&gt;Welcome to &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9oZXhvLmlvLw==&#34;&gt;Hexo&lt;/span&gt;! This is your very first post. Check &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9oZXhvLmlvL2RvY3Mv&#34;&gt;documentation&lt;/span&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9oZXhvLmlvL2RvY3MvdHJvdWJsZXNob290aW5nLmh0bWw=&#34;&gt;troubleshooting&lt;/span&gt; or you can ask me on &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvL2lzc3Vlcw==&#34;&gt;GitHub&lt;/span&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;quick-start&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#quick-start&#34;&gt;#&lt;/a&gt; Quick Start&lt;/h2&gt;
 &lt;h3 id=&#34;create-a-new-post&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#create-a-new-post&#34;&gt;#&lt;/a&gt; Create a new post&lt;/h3&gt;
