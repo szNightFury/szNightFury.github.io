@@ -134,13 +134,6 @@
   </url>
   
   <url>
-    <loc>http://nightfury.top/tags/SpinalHDL/</loc>
-    <lastmod>2023-09-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://nightfury.top/tags/Shoka/</loc>
     <lastmod>2023-09-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -162,14 +155,7 @@
   </url>
   
   <url>
-    <loc>http://nightfury.top/tags/IntelliJ-IDEA/</loc>
-    <lastmod>2023-09-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://nightfury.top/tags/sbt/</loc>
+    <loc>http://nightfury.top/tags/SpinalHDL/</loc>
     <lastmod>2023-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -184,6 +170,20 @@
   
   <url>
     <loc>http://nightfury.top/tags/Nginx/</loc>
+    <lastmod>2023-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://nightfury.top/tags/IntelliJ-IDEA/</loc>
+    <lastmod>2023-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://nightfury.top/tags/sbt/</loc>
     <lastmod>2023-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
