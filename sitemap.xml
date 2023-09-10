@@ -129,20 +129,6 @@
   </url>
   
   <url>
-    <loc>http://nightfury.top/tags/Ubuntu/</loc>
-    <lastmod>2023-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://nightfury.top/tags/Github/</loc>
-    <lastmod>2023-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://nightfury.top/tags/Shoka/</loc>
     <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
@@ -158,6 +144,20 @@
   
   <url>
     <loc>http://nightfury.top/tags/Typora/</loc>
+    <lastmod>2023-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://nightfury.top/tags/Ubuntu/</loc>
+    <lastmod>2023-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://nightfury.top/tags/Github/</loc>
     <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
