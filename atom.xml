@@ -17,7 +17,9 @@
         <content type="html">&lt;h1 id=&#34;a-low-power-and-low-latency-fpga-based-spiking-neural-network-accelerator&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#a-low-power-and-low-latency-fpga-based-spiking-neural-network-accelerator&#34;&gt;#&lt;/a&gt; A Low Power and Low Latency FPGA-Based Spiking Neural Network Accelerator&lt;/h1&gt;
 &lt;h2 id=&#34;摘要&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#摘要&#34;&gt;#&lt;/a&gt; 摘要&lt;/h2&gt;
 &lt;p&gt;翻译自 ChatGPT：&lt;/p&gt;
-&lt;p&gt;​		脉冲神经网络（SNNs），被称为神经网络的第三代，因其生物合理性和类似大脑的特征而著名。最近的努力进一步展示了 SNN 在高速推断方面的潜力，通过设计具有时间或空间维度并行性的加速器。然而，由于硬件资源的限制，加速器设计必须利用片外内存来存储许多中间数据，这导致了高功耗和长延迟。本文侧重于层间数据流以提高算术效率。基于脉冲的离散特性，我们设计了一个卷积池化（CONVP）单元，&lt;strong&gt;将卷积层和池化层的处理合并&lt;/strong&gt;，以减少延迟和资源利用率。此外，对于全连接层，我们应用了&lt;strong&gt;内部输出并行性和跨输出并行性&lt;/strong&gt;来加速网络推理。我们通过在 Zynq XA7Z020 FPGA 上实现不同的 SNN 模型，并使用不同的数据集来展示我们提出的硬件架构的有效性。实验结果显示，我们的加速器在 MNIST 数据集上与 FPGA 实现相比，可以实现约 28 倍的推断速度提升，并在 DVSGesture 数据集上与 ASIC 设计相比，可以实现约 15 倍的推断速度提升，功耗较低。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;脉冲神经网络（SNNs），被称为神经网络的第三代，因其生物合理性和类似大脑的特征而著名。最近的努力进一步展示了 SNN 在高速推断方面的潜力，通过设计具有时间或空间维度并行性的加速器。然而，由于硬件资源的限制，加速器设计必须利用片外内存来存储许多中间数据，这导致了高功耗和长延迟。本文侧重于层间数据流以提高算术效率。基于脉冲的离散特性，我们设计了一个卷积池化（CONVP）单元，&lt;strong&gt;将卷积层和池化层的处理合并&lt;/strong&gt;，以减少延迟和资源利用率。此外，对于全连接层，我们应用了&lt;strong&gt;内部输出并行性和跨输出并行性&lt;/strong&gt;来加速网络推理。我们通过在 Zynq XA7Z020 FPGA 上实现不同的 SNN 模型，并使用不同的数据集来展示我们提出的硬件架构的有效性。实验结果显示，我们的加速器在 MNIST 数据集上与 FPGA 实现相比，可以实现约 28 倍的推断速度提升，并在 DVSGesture 数据集上与 ASIC 设计相比，可以实现约 15 倍的推断速度提升，功耗较低。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;相关工作&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#相关工作&#34;&gt;#&lt;/a&gt; 相关工作&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;使用 &lt;strong&gt;rate coding&lt;/strong&gt;，&lt;strong&gt;IF&lt;/strong&gt; 神经元模型，没给出具体的时间步是多少。&lt;/li&gt;
@@ -46,7 +48,9 @@
         <content type="html">&lt;h1 id=&#34;efficient-hardware-acceleration-of-sparsely-active-convolutional-spiking-neural-networks&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#efficient-hardware-acceleration-of-sparsely-active-convolutional-spiking-neural-networks&#34;&gt;#&lt;/a&gt; Efficient Hardware Acceleration of Sparsely Active Convolutional Spiking Neural Networks&lt;/h1&gt;
 &lt;h2 id=&#34;摘要&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#摘要&#34;&gt;#&lt;/a&gt; 摘要&lt;/h2&gt;
 &lt;p&gt;翻译自 ChatGPT：&lt;/p&gt;
-&lt;p&gt;​		脉冲神经网络（SNNs）以事件驱动方式进行计算，以实现比标准神经网络更高效的计算。在 SNNs 中，神经元的输出不是编码为实值激活，而是编码为二进制脉冲序列。使用 SNNs 而不是传统神经网络的动机根植于脉冲处理的特殊计算方面，尤其是高度稀疏的脉冲。已经建立良好的卷积神经网络（CNNs）实现具有大型的处理元素（PEs）空间阵列，但在面对激活稀疏性时，它们的利用率仍然很低。我们提出了一种针对高度稀疏的卷积脉冲神经网络（CSNNs）进行优化的新型架构。&lt;strong&gt;所提出的架构包括一个与卷积内核大小相同的 PE 阵列以及一个智能脉冲队列，提供了高 PE 利用率&lt;/strong&gt;。通过将特征图压缩成可以逐个脉冲处理的队列，确保了脉冲的持续流动。这种压缩是在运行时执行的，导致了一种自时序调度。这使得处理时间可以随着脉冲数量的增加而扩展。此外，引入了一种新颖的内存组织方案，用于使用多个小型并行的片上 RAM 高效存储和检索各个神经元的膜电位。每个 RAM 都与其 PE 硬连线，减少了开关电路。我们在 FPGA 上实现了所提出的架构，并与以前提出的 SNN 实现相比实现了显著的加速（约 10 倍），同时需要更少的硬件资源并保持更高的能源效率（约 15 倍）。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;脉冲神经网络（SNNs）以事件驱动方式进行计算，以实现比标准神经网络更高效的计算。在 SNNs 中，神经元的输出不是编码为实值激活，而是编码为二进制脉冲序列。使用 SNNs 而不是传统神经网络的动机根植于脉冲处理的特殊计算方面，尤其是高度稀疏的脉冲。已经建立良好的卷积神经网络（CNNs）实现具有大型的处理元素（PEs）空间阵列，但在面对激活稀疏性时，它们的利用率仍然很低。我们提出了一种针对高度稀疏的卷积脉冲神经网络（CSNNs）进行优化的新型架构。&lt;strong&gt;所提出的架构包括一个与卷积内核大小相同的 PE 阵列以及一个智能脉冲队列，提供了高 PE 利用率&lt;/strong&gt;。通过将特征图压缩成可以逐个脉冲处理的队列，确保了脉冲的持续流动。这种压缩是在运行时执行的，导致了一种自时序调度。这使得处理时间可以随着脉冲数量的增加而扩展。此外，引入了一种新颖的内存组织方案，用于使用多个小型并行的片上 RAM 高效存储和检索各个神经元的膜电位。每个 RAM 都与其 PE 硬连线，减少了开关电路。我们在 FPGA 上实现了所提出的架构，并与以前提出的 SNN 实现相比实现了显著的加速（约 10 倍），同时需要更少的硬件资源并保持更高的能源效率（约 15 倍）。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;相关工作&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#相关工作&#34;&gt;#&lt;/a&gt; 相关工作&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;使用 &lt;strong&gt;m-TTFS coding&lt;/strong&gt;，比 rate coding 时间步更短，相较于 TTFS 的只发射一次脉冲变成持续发送脉冲，虽然脉冲稀疏性降低了，但是不需要再积累膜电势了，仍然比 rate coding 更加高效。但是后面在讲 Thresholding Unit 的时候，又提到说 m-TTFS coding 只发射一次脉冲，前后矛盾！！暂且认为是笔误了，Threshoding Unit 对于膜电势做两个判断，一是是否超过阈值，二是特定的 bit 有没有 set，set 说明发射过脉冲，而在最后一个时间步时会 reset.&lt;img data-src=&#34;/2023/09/07/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/Coding%E7%9F%9B%E7%9B%BE1.png&#34; class=&#34;&#34; title=&#34;Coding矛盾1&#34;&gt;&lt;img data-src=&#34;/2023/09/07/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/Coding%E7%9F%9B%E7%9B%BE2.png&#34; class=&#34;&#34; title=&#34;Coding矛盾2&#34;&gt;&lt;/li&gt;
@@ -262,9 +266,9 @@
 &lt;figure class=&#34;highlight php&#34;&gt;&lt;figcaption data-lang=&#34;PHP&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token php language-php&#34;&gt;&lt;span class=&#34;token delimiter important&#34;&gt;&amp;lt;?php&lt;/span&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	&lt;span class=&#34;token function&#34;&gt;phpinfo&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token delimiter important&#34;&gt;?&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;访问该 php 地址，得到正确的返回结果。完结，Move On！&lt;/p&gt;
 </content>
         <category term="Configuration" scheme="http://nightfury.top/categories/Configuration/" />
-        <category term="Ubuntu" scheme="http://nightfury.top/tags/Ubuntu/" />
         <category term="PHP" scheme="http://nightfury.top/tags/PHP/" />
         <category term="Nginx" scheme="http://nightfury.top/tags/Nginx/" />
+        <category term="Ubuntu" scheme="http://nightfury.top/tags/Ubuntu/" />
         <updated>2023-08-14T06:12:11.000Z</updated>
     </entry>
     <entry>
