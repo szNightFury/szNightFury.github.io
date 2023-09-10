@@ -9,7 +9,7 @@
       <name>NightFury</name>
     </author>
     <updated>2023-09-10T07:36:45.000Z</updated>
-    <category term="FPGA，SpinalHDL，CNN，SNN，Accelerator，Technique" />
+    <category term="FPGA，SpinalHDL，CNN，SNN，Accelerator，Technique，Paper" />
     <entry>
         <id>http://nightfury.top/2023/09/10/A-Low-Power-and-Low-Latency-FPGA-Based-Spiking-Neural-Network-Accelerator/</id>
         <title>A Low Power and Low Latency FPGA-Based Spiking Neural Network Accelerator</title>

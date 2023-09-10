@@ -12,7 +12,7 @@
         <language>zh-CN</language>
         <pubDate>Sun, 10 Sep 2023 15:36:45 +0800</pubDate>
         <lastBuildDate>Sun, 10 Sep 2023 15:36:45 +0800</lastBuildDate>
-        <category term="FPGA，SpinalHDL，CNN，SNN，Accelerator，Technique" />
+        <category term="FPGA，SpinalHDL，CNN，SNN，Accelerator，Technique，Paper" />
         <item>
             <guid isPermalink="true">http://nightfury.top/2023/09/10/A-Low-Power-and-Low-Latency-FPGA-Based-Spiking-Neural-Network-Accelerator/</guid>
             <title>A Low Power and Low Latency FPGA-Based Spiking Neural Network Accelerator</title>
