@@ -2,9 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://nightfury.top/2023/09/07/Efficient%20Hardware%20Acceleration%20of%20Sparsely%20Active%20Convolutional%20Spiking%20Neural%20Networks/</loc>
+    <loc>http://nightfury.top/2023/09/10/A-Low-Power-and-Low-Latency-FPGA-Based-Spiking-Neural-Network-Accelerator/</loc>
     
-    <lastmod>2023-09-09</lastmod>
+    <lastmod>2023-09-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://nightfury.top/2023/09/07/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/</loc>
+    
+    <lastmod>2023-09-10</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -85,7 +94,7 @@
 
   <url>
     <loc>http://nightfury.top/</loc>
-    <lastmod>2023-09-09</lastmod>
+    <lastmod>2023-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -93,98 +102,98 @@
   
   <url>
     <loc>http://nightfury.top/tags/SNN/</loc>
-    <lastmod>2023-09-09</lastmod>
+    <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://nightfury.top/tags/FPGA/</loc>
-    <lastmod>2023-09-09</lastmod>
+    <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://nightfury.top/tags/Hardware/</loc>
-    <lastmod>2023-09-09</lastmod>
+    <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://nightfury.top/tags/Hexo/</loc>
-    <lastmod>2023-09-09</lastmod>
+    <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://nightfury.top/tags/Ubuntu/</loc>
-    <lastmod>2023-09-09</lastmod>
+    <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://nightfury.top/tags/Github/</loc>
-    <lastmod>2023-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://nightfury.top/tags/Shoka/</loc>
-    <lastmod>2023-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://nightfury.top/tags/Markdown/</loc>
-    <lastmod>2023-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://nightfury.top/tags/Typora/</loc>
-    <lastmod>2023-09-09</lastmod>
+    <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://nightfury.top/tags/SpinalHDL/</loc>
-    <lastmod>2023-09-09</lastmod>
+    <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://nightfury.top/tags/PHP/</loc>
-    <lastmod>2023-09-09</lastmod>
+    <loc>http://nightfury.top/tags/Shoka/</loc>
+    <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://nightfury.top/tags/Nginx/</loc>
-    <lastmod>2023-09-09</lastmod>
+    <loc>http://nightfury.top/tags/Markdown/</loc>
+    <lastmod>2023-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://nightfury.top/tags/Typora/</loc>
+    <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://nightfury.top/tags/IntelliJ-IDEA/</loc>
-    <lastmod>2023-09-09</lastmod>
+    <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://nightfury.top/tags/sbt/</loc>
-    <lastmod>2023-09-09</lastmod>
+    <lastmod>2023-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://nightfury.top/tags/PHP/</loc>
+    <lastmod>2023-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://nightfury.top/tags/Nginx/</loc>
+    <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -193,49 +202,49 @@
   
   <url>
     <loc>http://nightfury.top/categories/Paper/</loc>
-    <lastmod>2023-09-09</lastmod>
+    <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://nightfury.top/categories/Configuration/</loc>
-    <lastmod>2023-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://nightfury.top/categories/Algorithm/</loc>
-    <lastmod>2023-09-09</lastmod>
+    <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://nightfury.top/categories/Paper/Algorithm/</loc>
-    <lastmod>2023-09-09</lastmod>
+    <lastmod>2023-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://nightfury.top/categories/Algorithm/</loc>
+    <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://nightfury.top/categories/Technique/</loc>
-    <lastmod>2023-09-09</lastmod>
+    <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://nightfury.top/categories/Algorithm/Draft/</loc>
-    <lastmod>2023-09-09</lastmod>
+    <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://nightfury.top/categories/Technique/Draft/</loc>
-    <lastmod>2023-09-09</lastmod>
+    <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
