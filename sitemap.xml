@@ -180,20 +180,6 @@
   </url>
   
   <url>
-    <loc>http://nightfury.top/tags/IntelliJ-IDEA/</loc>
-    <lastmod>2024-02-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://nightfury.top/tags/sbt/</loc>
-    <lastmod>2024-02-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://nightfury.top/tags/PHP/</loc>
     <lastmod>2024-02-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -202,6 +188,20 @@
   
   <url>
     <loc>http://nightfury.top/tags/Nginx/</loc>
+    <lastmod>2024-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://nightfury.top/tags/IntelliJ-IDEA/</loc>
+    <lastmod>2024-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://nightfury.top/tags/sbt/</loc>
     <lastmod>2024-02-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -231,13 +231,6 @@
   </url>
   
   <url>
-    <loc>http://nightfury.top/categories/Algorithm/</loc>
-    <lastmod>2024-02-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://nightfury.top/categories/Technique/</loc>
     <lastmod>2024-02-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -245,7 +238,7 @@
   </url>
   
   <url>
-    <loc>http://nightfury.top/categories/Algorithm/Draft/</loc>
+    <loc>http://nightfury.top/categories/Algorithm/</loc>
     <lastmod>2024-02-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -253,6 +246,13 @@
   
   <url>
     <loc>http://nightfury.top/categories/Technique/Draft/</loc>
+    <lastmod>2024-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://nightfury.top/categories/Algorithm/Draft/</loc>
     <lastmod>2024-02-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
