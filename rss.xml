@@ -104,7 +104,7 @@
             <link>http://nightfury.top/2024/07/04/Debian12%E9%85%8D%E7%BD%AENginx1.22%E4%B8%8EPhp8.2/</link>
             <category term="Configuration" scheme="http://nightfury.top/categories/Configuration/" />
             <category term="Debian" scheme="http://nightfury.top/tags/Debian/" />
-            <category term="PHP" scheme="http://nightfury.top/tags/PHP/" />
+            <category term="Php" scheme="http://nightfury.top/tags/Php/" />
             <category term="Nginx" scheme="http://nightfury.top/tags/Nginx/" />
             <pubDate>Thu, 04 Jul 2024 11:59:23 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;实验环境&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#实验环境&#34;&gt;#&lt;/a&gt; 实验环境&lt;/h1&gt;
@@ -959,7 +959,7 @@
             <link>http://nightfury.top/2023/08/13/Sbt%E7%BC%93%E5%AD%98%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE/</link>
             <category term="Configuration" scheme="http://nightfury.top/categories/Configuration/" />
             <category term="IntelliJ IDEA" scheme="http://nightfury.top/tags/IntelliJ-IDEA/" />
-            <category term="sbt" scheme="http://nightfury.top/tags/sbt/" />
+            <category term="Sbt" scheme="http://nightfury.top/tags/Sbt/" />
             <pubDate>Sun, 13 Aug 2023 18:16:24 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;sbt文件迁移&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#sbt文件迁移&#34;&gt;#&lt;/a&gt; Sbt 文件迁移&lt;/h1&gt;
 &lt;p&gt;Sbt 原来的缓存路径为  &lt;code&gt;C:\Users\&amp;#123;Your User Name&amp;#125;\AppData\Local&lt;/code&gt; ，里面包含了 .sbt 和 .ivy2 文件夹，在这里我将其迁移至  &lt;code&gt;D:\sbt&lt;/code&gt;  路径下&lt;/p&gt;
@@ -1011,7 +1011,7 @@
             <title>Php环境配置</title>
             <link>http://nightfury.top/2023/07/27/Php%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
             <category term="Configuration" scheme="http://nightfury.top/categories/Configuration/" />
-            <category term="PHP" scheme="http://nightfury.top/tags/PHP/" />
+            <category term="Php" scheme="http://nightfury.top/tags/Php/" />
             <category term="Nginx" scheme="http://nightfury.top/tags/Nginx/" />
             <category term="Ubuntu" scheme="http://nightfury.top/tags/Ubuntu/" />
             <pubDate>Thu, 27 Jul 2023 11:49:11 +0800</pubDate>

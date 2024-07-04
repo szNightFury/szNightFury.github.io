@@ -119,7 +119,7 @@
 </content>
         <category term="Configuration" scheme="http://nightfury.top/categories/Configuration/" />
         <category term="Debian" scheme="http://nightfury.top/tags/Debian/" />
-        <category term="PHP" scheme="http://nightfury.top/tags/PHP/" />
+        <category term="Php" scheme="http://nightfury.top/tags/Php/" />
         <category term="Nginx" scheme="http://nightfury.top/tags/Nginx/" />
         <updated>2024-07-04T03:59:23.000Z</updated>
     </entry>
@@ -963,7 +963,7 @@
 </content>
         <category term="Configuration" scheme="http://nightfury.top/categories/Configuration/" />
         <category term="IntelliJ IDEA" scheme="http://nightfury.top/tags/IntelliJ-IDEA/" />
-        <category term="sbt" scheme="http://nightfury.top/tags/sbt/" />
+        <category term="Sbt" scheme="http://nightfury.top/tags/Sbt/" />
         <updated>2023-08-13T10:16:24.000Z</updated>
     </entry>
     <entry>
@@ -1035,7 +1035,7 @@
 &lt;figure class=&#34;highlight php&#34;&gt;&lt;figcaption data-lang=&#34;PHP&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token php language-php&#34;&gt;&lt;span class=&#34;token delimiter important&#34;&gt;&amp;lt;?php&lt;/span&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	&lt;span class=&#34;token function&#34;&gt;phpinfo&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token delimiter important&#34;&gt;?&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;访问该 php 地址，得到正确的返回结果。完结，Move On！&lt;/p&gt;
 </content>
         <category term="Configuration" scheme="http://nightfury.top/categories/Configuration/" />
-        <category term="PHP" scheme="http://nightfury.top/tags/PHP/" />
+        <category term="Php" scheme="http://nightfury.top/tags/Php/" />
         <category term="Nginx" scheme="http://nightfury.top/tags/Nginx/" />
         <category term="Ubuntu" scheme="http://nightfury.top/tags/Ubuntu/" />
         <updated>2023-07-27T03:49:11.000Z</updated>
