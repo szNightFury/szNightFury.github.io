@@ -191,6 +191,13 @@
   </url>
   
   <url>
+    <loc>http://nightfury.top/tags/SpinalHDL/</loc>
+    <lastmod>2024-07-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://nightfury.top/tags/Shoka/</loc>
     <lastmod>2024-07-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -206,13 +213,6 @@
   
   <url>
     <loc>http://nightfury.top/tags/Typora/</loc>
-    <lastmod>2024-07-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://nightfury.top/tags/SpinalHDL/</loc>
     <lastmod>2024-07-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
