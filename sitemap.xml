@@ -158,7 +158,7 @@
   </url>
   
   <url>
-    <loc>http://nightfury.top/tags/Cloudreve/</loc>
+    <loc>http://nightfury.top/tags/Hexo/</loc>
     <lastmod>2024-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -179,14 +179,7 @@
   </url>
   
   <url>
-    <loc>http://nightfury.top/tags/Hexo/</loc>
-    <lastmod>2024-07-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://nightfury.top/tags/Ubuntu/</loc>
+    <loc>http://nightfury.top/tags/Cloudreve/</loc>
     <lastmod>2024-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -201,6 +194,13 @@
   
   <url>
     <loc>http://nightfury.top/tags/Nginx/</loc>
+    <lastmod>2024-07-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://nightfury.top/tags/Ubuntu/</loc>
     <lastmod>2024-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
