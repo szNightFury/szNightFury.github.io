@@ -167,7 +167,7 @@
   </url>
   
   <url>
-    <loc>http://nightfury.top/tags/Hexo/</loc>
+    <loc>http://nightfury.top/tags/Cloudreve/</loc>
     <lastmod>2024-11-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -188,7 +188,7 @@
   </url>
   
   <url>
-    <loc>http://nightfury.top/tags/Cloudreve/</loc>
+    <loc>http://nightfury.top/tags/Hexo/</loc>
     <lastmod>2024-11-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -302,14 +302,14 @@
   </url>
   
   <url>
-    <loc>http://nightfury.top/categories/Algorithm/Draft/</loc>
+    <loc>http://nightfury.top/categories/Technique/</loc>
     <lastmod>2024-11-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://nightfury.top/categories/Technique/</loc>
+    <loc>http://nightfury.top/categories/Algorithm/Draft/</loc>
     <lastmod>2024-11-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
