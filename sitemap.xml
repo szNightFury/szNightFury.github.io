@@ -188,13 +188,6 @@
   </url>
   
   <url>
-    <loc>http://nightfury.top/tags/Hexo/</loc>
-    <lastmod>2024-11-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://nightfury.top/tags/Php/</loc>
     <lastmod>2024-11-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -203,6 +196,20 @@
   
   <url>
     <loc>http://nightfury.top/tags/Nginx/</loc>
+    <lastmod>2024-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://nightfury.top/tags/Hexo/</loc>
+    <lastmod>2024-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://nightfury.top/tags/Ubuntu/</loc>
     <lastmod>2024-11-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -224,13 +231,6 @@
   
   <url>
     <loc>http://nightfury.top/tags/Typora/</loc>
-    <lastmod>2024-11-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://nightfury.top/tags/Ubuntu/</loc>
     <lastmod>2024-11-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
