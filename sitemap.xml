@@ -4,7 +4,7 @@
   <url>
     <loc>http://nightfury.top/2024/07/04/Debian12%E9%85%8D%E7%BD%AENginx1.22%E4%B8%8EPhp8.2/</loc>
     
-    <lastmod>2024-11-23</lastmod>
+    <lastmod>2024-11-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -167,7 +167,7 @@
   </url>
   
   <url>
-    <loc>http://nightfury.top/tags/Hexo/</loc>
+    <loc>http://nightfury.top/tags/Cloudreve/</loc>
     <lastmod>2024-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -188,7 +188,7 @@
   </url>
   
   <url>
-    <loc>http://nightfury.top/tags/Cloudreve/</loc>
+    <loc>http://nightfury.top/tags/Hexo/</loc>
     <lastmod>2024-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -203,13 +203,6 @@
   
   <url>
     <loc>http://nightfury.top/tags/Nginx/</loc>
-    <lastmod>2024-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://nightfury.top/tags/Ubuntu/</loc>
     <lastmod>2024-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -231,6 +224,13 @@
   
   <url>
     <loc>http://nightfury.top/tags/Typora/</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://nightfury.top/tags/Ubuntu/</loc>
     <lastmod>2024-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -302,14 +302,14 @@
   </url>
   
   <url>
-    <loc>http://nightfury.top/categories/Algorithm/Draft/</loc>
+    <loc>http://nightfury.top/categories/Technique/</loc>
     <lastmod>2024-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://nightfury.top/categories/Technique/</loc>
+    <loc>http://nightfury.top/categories/Algorithm/Draft/</loc>
     <lastmod>2024-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
