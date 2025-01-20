@@ -1,0 +1,2079 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://nightfury.top</id>
+    <title>NightFury</title>
+    <subtitle>行动胜于空想</subtitle>
+    <icon>https://nightfury.top/assets/favicon.ico</icon>
+    <link href="https://nightfury.top" />
+    <author>
+      <name>NightFury</name>
+    </author>
+    <updated>2025-01-20T09:59:54.368Z</updated>
+    <category term="Hardware Accelerator" />
+    <category term=" Software Configuration" />
+    <entry>
+        <id>https://nightfury.top/2025/01/20/HelloWorld/</id>
+        <title>Hello World</title>
+        <link rel="alternate" href="https://nightfury.top/2025/01/20/HelloWorld/"/>
+        <content type="html">&lt;p&gt;Welcome to &lt;a href=&#34;https://hexo.io/&#34;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&#34;https://hexo.io/docs/&#34;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&#34;https://hexo.io/docs/troubleshooting.html&#34;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&#34;https://github.com/hexojs/hexo/issues&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;Quick-Start&#34;&gt;&lt;a href=&#34;#Quick-Start&#34; class=&#34;headerlink&#34; title=&#34;Quick Start&#34;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&#34;Create-a-new-post&#34;&gt;&lt;a href=&#34;#Create-a-new-post&#34; class=&#34;headerlink&#34; title=&#34;Create a new post&#34;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ hexo new &amp;quot;My New Post&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/writing.html&#34;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;Run-server&#34;&gt;&lt;a href=&#34;#Run-server&#34; class=&#34;headerlink&#34; title=&#34;Run server&#34;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ hexo server
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/server.html&#34;&gt;Server&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;Generate-static-files&#34;&gt;&lt;a href=&#34;#Generate-static-files&#34; class=&#34;headerlink&#34; title=&#34;Generate static files&#34;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ hexo generate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/generating.html&#34;&gt;Generating&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;Deploy-to-remote-sites&#34;&gt;&lt;a href=&#34;#Deploy-to-remote-sites&#34; class=&#34;headerlink&#34; title=&#34;Deploy to remote sites&#34;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ hexo deploy
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/one-command-deployment.html&#34;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+</content>
+        <updated>2025-01-20T09:59:54.368Z</updated>
+    </entry>
+    <entry>
+        <id>https://nightfury.top/2024/07/05/%E5%88%A9%E7%94%A8Acme%E8%84%9A%E6%9C%AC%E8%87%AA%E5%8A%A8%E7%94%B3%E8%AF%B7SSL%E8%AF%81%E4%B9%A6/</id>
+        <title>利用Acme脚本自动申请SSL证书</title>
+        <link rel="alternate" href="https://nightfury.top/2024/07/05/%E5%88%A9%E7%94%A8Acme%E8%84%9A%E6%9C%AC%E8%87%AA%E5%8A%A8%E7%94%B3%E8%AF%B7SSL%E8%AF%81%E4%B9%A6/"/>
+        <content type="html">&lt;p&gt;在这篇博客中，我们将介绍如何在Linux服务器上使用 &lt;code&gt;acme.sh&lt;/code&gt; 申请Let’s Encrypt证书，并配置自动续签任务。以下脚本将自动执行这些步骤，确保你的服务器能够使用免费的 SSL 证书并自动续签，完整代码开源在 &lt;a href=&#34;https://github.com/szNightFury/Acme&#34;&gt;szNightFury‘s Github&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;前提条件&#34;&gt;&lt;a href=&#34;#前提条件&#34; class=&#34;headerlink&#34; title=&#34;前提条件&#34;&gt;&lt;/a&gt;前提条件&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;确保你有一个域名，并且能够修改其 DNS 记录。&lt;/li&gt;
+&lt;li&gt;确保你的服务器上已经安装了 Nginx（或其他Web服务器）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;脚本详解&#34;&gt;&lt;a href=&#34;#脚本详解&#34; class=&#34;headerlink&#34; title=&#34;脚本详解&#34;&gt;&lt;/a&gt;脚本详解&lt;/h3&gt;&lt;h4 id=&#34;1-确保脚本以root身份运行&#34;&gt;&lt;a href=&#34;#1-确保脚本以root身份运行&#34; class=&#34;headerlink&#34; title=&#34;1. 确保脚本以root身份运行&#34;&gt;&lt;/a&gt;1. 确保脚本以&lt;code&gt;root&lt;/code&gt;身份运行&lt;/h4&gt;&lt;p&gt;为了执行需要管理员权限的操作，脚本需要以&lt;code&gt;root&lt;/code&gt;身份运行。如果当前用户不是&lt;code&gt;root&lt;/code&gt;，脚本将退出并提示用户以&lt;code&gt;root&lt;/code&gt;身份重新运行。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;if [ &amp;quot;$EUID&amp;quot; -ne 0 ]; then
+    echo &amp;quot;请以 root 身份运行此脚本。&amp;quot;
+    exit 1
+fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;2-检查系统类型&#34;&gt;&lt;a href=&#34;#2-检查系统类型&#34; class=&#34;headerlink&#34; title=&#34;2. 检查系统类型&#34;&gt;&lt;/a&gt;2. 检查系统类型&lt;/h4&gt;&lt;p&gt;脚本会检测当前操作系统类型，以便使用适当的软件包管理器安装所需的依赖项。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    OS=$ID
+else
+    echo &amp;quot;无法确定操作系统类型，请手动检查。&amp;quot;
+    exit 1
+fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;3-安装socat&#34;&gt;&lt;a href=&#34;#3-安装socat&#34; class=&#34;headerlink&#34; title=&#34;3. 安装socat&#34;&gt;&lt;/a&gt;3. 安装&lt;code&gt;socat&lt;/code&gt;&lt;/h4&gt;&lt;p&gt;&lt;code&gt;socat&lt;/code&gt;是一个多功能的网络工具，用于建立独立的双向连接。脚本会检查是否已经安装了&lt;code&gt;socat&lt;/code&gt;，如果没有，则根据操作系统类型进行安装。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;if ! command -v socat &amp;amp;&amp;gt; /dev/null; then
+    echo &amp;quot;socat 未安装，正在安装 socat...&amp;quot;
+    if [ &amp;quot;$OS&amp;quot; == &amp;quot;debian&amp;quot; ] || [ &amp;quot;$OS&amp;quot; == &amp;quot;ubuntu&amp;quot; ]; then
+        apt update
+        apt install -y socat
+    elif [ &amp;quot;$OS&amp;quot; == &amp;quot;centos&amp;quot; ]; then
+        yum install -y socat
+    else
+        echo &amp;quot;不支持的操作系统。&amp;quot;
+        exit 1
+    fi
+    if [ $? -ne 0 ]; then
+        echo &amp;quot;socat 安装失败，请检查错误信息。&amp;quot;
+        exit 1
+    fi
+else
+    echo &amp;quot;socat 已安装。&amp;quot;
+fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;4-检查-Nginx-服务状态&#34;&gt;&lt;a href=&#34;#4-检查-Nginx-服务状态&#34; class=&#34;headerlink&#34; title=&#34;4. 检查 Nginx 服务状态&#34;&gt;&lt;/a&gt;4. 检查 Nginx 服务状态&lt;/h4&gt;&lt;p&gt;脚本会检查 Nginx 服务是否正在运行，如果是，则停止服务以释放 80 端口（如有其他程序占用 80 端口，请修改下面代码）&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;nginx_status=$(systemctl is-active nginx)
+if [ &amp;quot;$nginx_status&amp;quot; == &amp;quot;active&amp;quot; ]; then
+    echo &amp;quot;nginx 服务正在运行，准备停止...&amp;quot;
+    systemctl stop nginx
+    if [ $? -ne 0 ]; then
+        echo &amp;quot;停止 nginx 失败，请检查错误信息。&amp;quot;
+        exit 1
+    fi
+else
+    echo &amp;quot;nginx 服务未运行，无需停止。&amp;quot;
+fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;5-检查端口-80-是否被占用&#34;&gt;&lt;a href=&#34;#5-检查端口-80-是否被占用&#34; class=&#34;headerlink&#34; title=&#34;5. 检查端口 80 是否被占用&#34;&gt;&lt;/a&gt;5. 检查端口 80 是否被占用&lt;/h4&gt;&lt;p&gt;脚本会检查端口 80 是否被占用，如果被占用，将提示用户并退出。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;if lsof -i:80 &amp;amp;&amp;gt; /dev/null; then
+    echo &amp;quot;端口 80 被占用，无法继续。&amp;quot;
+    exit 1
+fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;6-安装-acme-sh&#34;&gt;&lt;a href=&#34;#6-安装-acme-sh&#34; class=&#34;headerlink&#34; title=&#34;6. 安装 acme.sh&#34;&gt;&lt;/a&gt;6. 安装 &lt;code&gt;acme.sh&lt;/code&gt;&lt;/h4&gt;&lt;p&gt;&lt;code&gt;acme.sh&lt;/code&gt; 是一个纯 Unix Shell 脚本，用于从 Let’s Encrypt 申请 SSL 证书。脚本会检查是否已经安装了 &lt;code&gt;acme.sh&lt;/code&gt;，如果没有，则进行安装。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;if [ ! -d &amp;quot;$HOME/.acme.sh&amp;quot; ]; then
+    echo &amp;quot;正在安装 acme.sh...&amp;quot;
+    curl https://get.acme.sh | sh
+    if [ $? -ne 0 ]; then
+        echo &amp;quot;acme.sh 安装失败，请检查错误信息。&amp;quot;
+        exit 1
+    fi
+else
+    echo &amp;quot;acme.sh 已安装。&amp;quot;
+fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;7-设置默认-CA-为-Let’s-Encrypt&#34;&gt;&lt;a href=&#34;#7-设置默认-CA-为-Let’s-Encrypt&#34; class=&#34;headerlink&#34; title=&#34;7. 设置默认 CA 为 Let’s Encrypt&#34;&gt;&lt;/a&gt;7. 设置默认 CA 为 Let’s Encrypt&lt;/h4&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;echo &amp;quot;设置默认 CA 为 Let’s Encrypt...&amp;quot;
+~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;8-获取用户输入的域名&#34;&gt;&lt;a href=&#34;#8-获取用户输入的域名&#34; class=&#34;headerlink&#34; title=&#34;8. 获取用户输入的域名&#34;&gt;&lt;/a&gt;8. 获取用户输入的域名&lt;/h4&gt;&lt;p&gt;脚本会提示用户输入主域名和附加域名。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;read -p &amp;quot;请输入主域名: &amp;quot; main_domain
+domains=($main_domain)
+while true; do
+    read -p &amp;quot;请输入附加域名（或按 Enter 键结束输入）: &amp;quot; additional_domain
+    if [ -z &amp;quot;$additional_domain&amp;quot; ]; then
+        break
+    fi
+    domains+=(&amp;quot;$additional_domain&amp;quot;)
+done
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;9-生成域名参数&#34;&gt;&lt;a href=&#34;#9-生成域名参数&#34; class=&#34;headerlink&#34; title=&#34;9. 生成域名参数&#34;&gt;&lt;/a&gt;9. 生成域名参数&lt;/h4&gt;&lt;p&gt;根据用户输入的域名生成域名参数，用于申请证书。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;domain_args=&amp;quot;&amp;quot;
+for domain in &amp;quot;$&amp;#123;domains[@]&amp;#125;&amp;quot;; do
+    domain_args=&amp;quot;$domain_args -d $domain&amp;quot;
+done
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;10-申请测试证书&#34;&gt;&lt;a href=&#34;#10-申请测试证书&#34; class=&#34;headerlink&#34; title=&#34;10. 申请测试证书&#34;&gt;&lt;/a&gt;10. 申请测试证书&lt;/h4&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;echo &amp;quot;申请测试证书...&amp;quot;
+~/.acme.sh/acme.sh --issue $domain_args --standalone -k ec-256 --force --test
+if [ $? -ne 0 ]; then
+    echo &amp;quot;测试证书申请失败，请检查错误信息。&amp;quot;
+    exit 1
+fi
+
+echo &amp;quot;删除测试证书...&amp;quot;
+rm -rf &amp;quot;$HOME/.acme.sh/$&amp;#123;main_domain&amp;#125;_ecc&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;11-申请正式证书&#34;&gt;&lt;a href=&#34;#11-申请正式证书&#34; class=&#34;headerlink&#34; title=&#34;11. 申请正式证书&#34;&gt;&lt;/a&gt;11. 申请正式证书&lt;/h4&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;echo &amp;quot;申请正式证书...&amp;quot;
+~/.acme.sh/acme.sh --issue $domain_args --standalone -k ec-256 --force
+if [ $? -ne 0 ]; then
+    echo &amp;quot;正式证书申请失败，请检查错误信息。&amp;quot;
+    exit 1
+fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;12-安装证书&#34;&gt;&lt;a href=&#34;#12-安装证书&#34; class=&#34;headerlink&#34; title=&#34;12. 安装证书&#34;&gt;&lt;/a&gt;12. 安装证书&lt;/h4&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;echo &amp;quot;创建证书存储目录...&amp;quot;
+mkdir -p /etc/cert
+
+echo &amp;quot;安装证书...&amp;quot;
+~/.acme.sh/acme.sh --installcert -d &amp;quot;$main_domain&amp;quot; --fullchainpath /etc/cert/fullchain.pem --keypath /etc/cert/privkey.pem --ecc --force
+if [ $? -ne 0 ]; then
+    echo &amp;quot;证书安装失败，请检查错误信息。&amp;quot;
+    exit 1
+fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;13-重新启动-Nginx-服务&#34;&gt;&lt;a href=&#34;#13-重新启动-Nginx-服务&#34; class=&#34;headerlink&#34; title=&#34;13. 重新启动 Nginx 服务&#34;&gt;&lt;/a&gt;13. 重新启动 Nginx 服务&lt;/h4&gt;&lt;p&gt;如果 Nginx 之前正在运行，脚本会重新启动 Nginx 服务。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;if [ &amp;quot;$nginx_status&amp;quot; == &amp;quot;active&amp;quot; ]; then
+    echo &amp;quot;重新启动 nginx 服务...&amp;quot;
+    systemctl start nginx
+    if [ $? -ne 0 ]; then
+        echo &amp;quot;启动 nginx 失败，请检查错误信息。&amp;quot;
+        exit 1
+    fi
+fi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;14-设置自动续签任务&#34;&gt;&lt;a href=&#34;#14-设置自动续签任务&#34; class=&#34;headerlink&#34; title=&#34;14. 设置自动续签任务&#34;&gt;&lt;/a&gt;14. 设置自动续签任务&lt;/h4&gt;&lt;p&gt;为了确保证书在到期前自动续签，脚本会配置一个定时任务。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;echo &amp;quot;设置自动续签任务...&amp;quot;
+crontab -l | grep -v &amp;quot;acme.sh --cron&amp;quot; | crontab -
+(crontab -l 2&amp;gt;/dev/null; echo &amp;quot;0 0 * * * ~/.acme.sh/acme.sh --cron --home ~/.acme.sh &amp;gt; /dev/null 2&amp;gt;&amp;amp;1&amp;quot;) | crontab -
+if [ $? -ne 0 ]; then
+    echo &amp;quot;自动续签任务设置失败，请检查错误信息。&amp;quot;
+    exit 1
+fi
+
+echo &amp;quot;证书申请、安装和自动续签任务设置完成。&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;结论&#34;&gt;&lt;a href=&#34;#结论&#34; class=&#34;headerlink&#34; title=&#34;结论&#34;&gt;&lt;/a&gt;结论&lt;/h3&gt;&lt;p&gt;通过这个脚本，你可以自动化从申请到安装以及配置自动续签 Let’s Encrypt 证书的整个过程。这将确保你的服务器始终使用有效的 SSL 证书，从而提高安全性。&lt;/p&gt;
+</content>
+        <category term="Configuration" scheme="https://nightfury.top/categories/Configuration/" />
+        <category term="Debian" scheme="https://nightfury.top/tags/Debian/" />
+        <category term="Ubuntu" scheme="https://nightfury.top/tags/Ubuntu/" />
+        <category term="SSL" scheme="https://nightfury.top/tags/SSL/" />
+        <category term="Linux" scheme="https://nightfury.top/tags/Linux/" />
+        <updated>2024-07-05T08:09:11.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://nightfury.top/2024/07/05/Debian12%E9%83%A8%E7%BD%B2Cloudreve%E4%BA%91%E7%9B%98/</id>
+        <title>Debian12部署Cloudreve云盘</title>
+        <link rel="alternate" href="https://nightfury.top/2024/07/05/Debian12%E9%83%A8%E7%BD%B2Cloudreve%E4%BA%91%E7%9B%98/"/>
+        <content type="html">&lt;p&gt;Cloudreve 是一款开源的网盘系统，支持多种存储后端，可以方便地搭建私人网盘。&lt;/p&gt;
+&lt;p&gt;VPS 环境：Debian 12&lt;/p&gt;
+&lt;p&gt;CloudReve 版本：3.8.3&lt;/p&gt;
+&lt;h2 id=&#34;步骤一：更新系统&#34;&gt;&lt;a href=&#34;#步骤一：更新系统&#34; class=&#34;headerlink&#34; title=&#34;步骤一：更新系统&#34;&gt;&lt;/a&gt;步骤一：更新系统&lt;/h2&gt;&lt;p&gt;首先，确保你的系统是最新的。运行以下命令更新软件包列表并升级所有已安装的软件包：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo apt update &amp;amp;&amp;amp; sudo apt upgrade -y
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;步骤二：下载-Cloudreve&#34;&gt;&lt;a href=&#34;#步骤二：下载-Cloudreve&#34; class=&#34;headerlink&#34; title=&#34;步骤二：下载 Cloudreve&#34;&gt;&lt;/a&gt;步骤二：下载 Cloudreve&lt;/h2&gt;&lt;p&gt;访问 &lt;a href=&#34;https://github.com/cloudreve/Cloudreve/releases&#34;&gt;Cloudreve的GitHub页面&lt;/a&gt; 以获取最新版本的 Cloudreve。或者，你可以使用 curl 命令直接下载 3.8.3 版本（截止博客发表前的最新版本）：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;curl -L -o cloudreve.zip https://github.com/cloudreve/Cloudreve/releases/download/3.8.3/cloudreve_3.8.3_linux_amd64.tar.gz
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;下载完成后，解压文件：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;mkdir /opt/cloudreve
+tar -xvzf cloudreve_3.8.3_linux_amd64.tar.gz -C /opt/cloudreve
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;步骤三：配置-Cloudreve&#34;&gt;&lt;a href=&#34;#步骤三：配置-Cloudreve&#34; class=&#34;headerlink&#34; title=&#34;步骤三：配置 Cloudreve&#34;&gt;&lt;/a&gt;步骤三：配置 Cloudreve&lt;/h2&gt;&lt;p&gt;进入 Cloudreve 的目录，并赋予可执行权限：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cd /opt/cloudreve
+chmod +x cloudreve
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;运行 Cloudreve 以生成默认配置文件：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;./cloudreve # 初次启动会生成管理员账号和密码, 请妥善保存好, 后面可以进面板修改账号和密码
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;初次运行后，会生成一个名为 &lt;code&gt;conf.ini&lt;/code&gt; 的配置文件，你可以根据需要修改此文件。以下是一个示例配置：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;[System]
+; 运行模式
+Mode = master
+; 监听端口
+Listen = :5212
+; 是否开启 Debug
+Debug = false
+; Session 密钥, 一般在首次启动时自动生成
+SessionSecret = 23333
+; Hash 加盐, 一般在首次启动时自动生成
+HashIDSalt = something really hard to guss
+
+; 实测只会生成上述上述五个配置, 下面的配置如有需要请自行选择
+
+; 呈递客户端 IP 时使用的 Header
+ProxyHeader = X-Forwarded-For
+
+; SSL 相关
+[SSL]
+; SSL 监听端口
+Listen = :443
+; 证书路径
+CertPath = C:\Users\i\Documents\fullchain.pem
+; 私钥路径
+KeyPath = C:\Users\i\Documents\privkey.pem
+
+; 启用 Unix Socket 监听
+[UnixSocket]
+Listen = /run/cloudreve/cloudreve.sock
+; 设置产生的 socket 文件的权限
+Perm = 0666
+
+; 数据库相关，如果你只想使用内置的 SQLite 数据库，这一部分直接删去即可
+[Database]
+; 数据库类型，目前支持 sqlite/mysql/mssql/postgres
+Type = mysql
+; MySQL 端口
+Port = 3306
+; 用户名
+User = root
+; 密码
+Password = root
+; 数据库地址
+Host = 127.0.0.1
+; 数据库名称
+Name = v3
+; 数据表前缀
+TablePrefix = cd_
+; 字符集
+Charset = utf8mb4
+; SQLite 数据库文件路径
+DBFile = cloudreve.db
+; 进程退出前安全关闭数据库连接的缓冲时间
+GracePeriod = 30
+; 使用 Unix Socket 连接到数据库
+UnixSocket = false
+
+; 从机模式下的配置
+[Slave]
+; 通信密钥
+Secret = 1234567891234567123456789123456712345678912345671234567891234567
+; 回调请求超时时间 (s)
+CallbackTimeout = 20
+; 签名有效期
+SignatureTTL = 60
+
+; 跨域配置
+[CORS]
+AllowOrigins = *
+AllowMethods = OPTIONS,GET,POST
+AllowHeaders = *
+AllowCredentials = false
+SameSite = Default
+Secure = lse
+
+; Redis 相关
+[Redis]
+Server = 127.0.0.1:6379
+Password =
+DB = 0
+
+; 从机配置覆盖
+[OptionOverwrite]
+; 可直接使用 `设置名称 = 值` 的格式覆盖
+max_worker_num = 50
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;步骤五：创建-systemd-服务&#34;&gt;&lt;a href=&#34;#步骤五：创建-systemd-服务&#34; class=&#34;headerlink&#34; title=&#34;步骤五：创建 systemd 服务&#34;&gt;&lt;/a&gt;步骤五：创建 systemd 服务&lt;/h2&gt;&lt;p&gt;为了方便管理 Cloudreve，可以创建一个 systemd 服务。&lt;/p&gt;
+&lt;p&gt;创建一个名为 &lt;code&gt;cloudreve.service&lt;/code&gt; 的文件：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;nano /usr/lib/systemd/system/cloudreve.service
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在文件中添加以下内容（将下文 &lt;code&gt;PATH_TO_CLOUDREVE&lt;/code&gt; 更换为程序所在目录，本文即 &lt;code&gt;/opt/cloudreve/&lt;/code&gt;）：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;[Unit]
+Description=Cloudreve
+Documentation=https://docs.cloudreve.org
+After=network.target
+After=mysqld.service
+Wants=network.target
+
+[Service]
+WorkingDirectory=/PATH_TO_CLOUDREVE
+ExecStart=/PATH_TO_CLOUDREVE/cloudreve
+Restart=on-abnormal
+RestartSec=5s
+KillMode=mixed
+
+StandardOutput=null
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;保存并退出后，重新加载 systemd 服务：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# 更新配置
+systemctl daemon-reload
+
+# 启动服务
+systemctl start cloudreve
+
+# 设置开机启动
+systemctl enable cloudreve
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;步骤六：访问Cloudreve&#34;&gt;&lt;a href=&#34;#步骤六：访问Cloudreve&#34; class=&#34;headerlink&#34; title=&#34;步骤六：访问Cloudreve&#34;&gt;&lt;/a&gt;步骤六：访问Cloudreve&lt;/h2&gt;&lt;p&gt;Cloudreve 默认监听在 5212 端口。你可以通过访问 &lt;code&gt;http://你的服务器IP:5212&lt;/code&gt; 来访问 Cloudreve。&lt;/p&gt;
+&lt;p&gt;初次登录时，用管理员账户登录，然后点击头像里的管理面板做进一步的个性化设置。&lt;/p&gt;
+&lt;h2 id=&#34;步骤七：配置Nginx反向代理（可选）&#34;&gt;&lt;a href=&#34;#步骤七：配置Nginx反向代理（可选）&#34; class=&#34;headerlink&#34; title=&#34;步骤七：配置Nginx反向代理（可选）&#34;&gt;&lt;/a&gt;步骤七：配置Nginx反向代理（可选）&lt;/h2&gt;&lt;p&gt;为了更加安全和便捷地访问 Cloudreve，可以使用Nginx配置反向代理并启用HTTPS。&lt;/p&gt;
+&lt;p&gt;在网站的 server 段添加以下内容（实际应用中推荐强制 https，然后在 443 端口反代 5212 端口）：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-nginx&#34;&gt;location / &amp;#123;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+    proxy_pass http://127.0.0.1:5212;
+
+    # 如果不使用本地存储策略，可以注释掉
+    client_max_body_size 20G; # 设置理论最大文件尺寸（这里即20 GB）
+&amp;#125;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;启用这个配置并重新加载Nginx：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;systemctl restart nginx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;至此，你应该可以通过你的域名访问 Cloudreve 云盘了。现在你可以开始使用这个强大的网盘系统来管理和分享你的文件了。如果你在配置过程中遇到任何问题，可以参考&lt;a href=&#34;https://docs.cloudreve.org/&#34;&gt;Cloudreve的文档&lt;/a&gt;获取更多帮助。&lt;/p&gt;
+</content>
+        <category term="Configuration" scheme="https://nightfury.top/categories/Configuration/" />
+        <category term="Debian" scheme="https://nightfury.top/tags/Debian/" />
+        <category term="Github" scheme="https://nightfury.top/tags/Github/" />
+        <category term="Cloudreve" scheme="https://nightfury.top/tags/Cloudreve/" />
+        <updated>2024-07-05T06:38:20.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://nightfury.top/2024/07/04/Debian12%E7%B3%BB%E7%BB%9FHexo%E9%83%A8%E7%BD%B2%E5%88%B0VPS/</id>
+        <title>Debian12系统Hexo部署到VPS</title>
+        <link rel="alternate" href="https://nightfury.top/2024/07/04/Debian12%E7%B3%BB%E7%BB%9FHexo%E9%83%A8%E7%BD%B2%E5%88%B0VPS/"/>
+        <content type="html">&lt;p&gt;网上大部分教程都是将 Hexo 部署到 GitHub Pages 上面，本文主要介绍如何部署到 VPS。&lt;/p&gt;
+&lt;p&gt;VPS 环境：Debian 12&lt;/p&gt;
+&lt;h1 id=&#34;准备工作&#34;&gt;&lt;a href=&#34;#准备工作&#34; class=&#34;headerlink&#34; title=&#34;准备工作&#34;&gt;&lt;/a&gt;准备工作&lt;/h1&gt;&lt;p&gt;网上流传的武功秘籍分为两种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将 Hexo 项目上传到 VPS 上面后执行 &lt;code&gt;hexo server&lt;/code&gt;，之后配置 Nginx 反向代理，让域名指向 &lt;a href=&#34;http://localhost:4000。&#34;&gt;http://localhost:4000。&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;将 Hexo 在本地通过 &lt;code&gt;hexo generate&lt;/code&gt; 生成静态文件，在通过 &lt;code&gt;hexo deploy&lt;/code&gt; 部署到 VPS 上面，使用 Nginx 直接做 Web 服务器。&lt;/li&gt;
+&lt;li&gt;相比第二种方式，第一种每次写博客与更新博客时候的操作会很繁琐。所以我们使用第二种方式进行部署，这样既可以将静态文件 deploy 到 VPS 上，也可以上传到 Github 上用作备份，操作性和安全性上都要胜于前者。&lt;/li&gt;
+&lt;li&gt;而对于第二种方式而言，常用的又有 &lt;code&gt;git hook&lt;/code&gt; 和 &lt;code&gt;rsync &lt;/code&gt;两种自动部署解决方案。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本文主要介绍 &lt;code&gt;git hook&lt;/code&gt; 部署过程。&lt;/p&gt;
+&lt;h1 id=&#34;Git-Hooks-自动部署&#34;&gt;&lt;a href=&#34;#Git-Hooks-自动部署&#34; class=&#34;headerlink&#34; title=&#34;Git Hooks 自动部署&#34;&gt;&lt;/a&gt;Git Hooks 自动部署&lt;/h1&gt;&lt;h2 id=&#34;部署原理&#34;&gt;&lt;a href=&#34;#部署原理&#34; class=&#34;headerlink&#34; title=&#34;部署原理&#34;&gt;&lt;/a&gt;部署原理&lt;/h2&gt;&lt;p&gt;我们在本地编辑文本，然后使用 Git 远程部署到 VPS 的 Git 仓库。&lt;code&gt;hexo d&lt;/code&gt; 命令实际上只 deploy 了本地的 public 文件夹，Git Hooks 实际上就是当 Git 仓库收到最新的 push 时，将 Git 仓库接受到的内容复制到 VPS 上的网站目录内。相当于完成了手动将 public 文件夹复制到 VPS 的网站根目录里。&lt;/p&gt;
+&lt;h2 id=&#34;安装配置-Git&#34;&gt;&lt;a href=&#34;#安装配置-Git&#34; class=&#34;headerlink&#34; title=&#34;安装配置 Git&#34;&gt;&lt;/a&gt;安装配置 Git&lt;/h2&gt;&lt;h3 id=&#34;安装-Git&#34;&gt;&lt;a href=&#34;#安装-Git&#34; class=&#34;headerlink&#34; title=&#34;安装 Git&#34;&gt;&lt;/a&gt;安装 Git&lt;/h3&gt;&lt;p&gt;通过 SSH 连接 VPS，执行：&lt;code&gt;apt-get install git&lt;/code&gt;，完成后通过 &lt;code&gt;git --version&lt;/code&gt; 查看 Git 版本，若显示版本信息则说明安装成功。&lt;/p&gt;
+&lt;h3 id=&#34;创建-git-用户&#34;&gt;&lt;a href=&#34;#创建-git-用户&#34; class=&#34;headerlink&#34; title=&#34;创建 git 用户&#34;&gt;&lt;/a&gt;创建 git 用户&lt;/h3&gt;&lt;p&gt;执行：&lt;code&gt;adduser git&lt;/code&gt;，根据提示设置密码，其他信息可以一路空格。&lt;/p&gt;
+&lt;h3 id=&#34;赋予-git-用户-sudo-权限&#34;&gt;&lt;a href=&#34;#赋予-git-用户-sudo-权限&#34; class=&#34;headerlink&#34; title=&#34;赋予 git 用户 sudo 权限&#34;&gt;&lt;/a&gt;赋予 git 用户 sudo 权限&lt;/h3&gt;&lt;p&gt;安装 sudo：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;apt update
+apt install sudo
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;执行：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;chmod 740 /etc/sudoers
+nano /etc/sudoers
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;找到以下内容：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;## User privilege specification
+root ALL=(ALL:ALL) ALL
+# 在 root ALL=(ALL:ALL) ALL 这一行下面添加
+git ALL=(ALL:ALL) ALL
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;保存退出后，修改回文件权限：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;chmod 440 /etc/sudoers
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;关闭-git-用户-shell-权限&#34;&gt;&lt;a href=&#34;#关闭-git-用户-shell-权限&#34; class=&#34;headerlink&#34; title=&#34;关闭 git 用户 shell 权限&#34;&gt;&lt;/a&gt;关闭 git 用户 shell 权限&lt;/h3&gt;&lt;p&gt;我们也可以通过：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;ssh git@VPS IP
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;ssh 连接服务器，登录到服务器上，对服务器进行各种操作，这通常很不安全，也不合适，我们只需要能对仓库操作就可以了，不需要更大的权限。&lt;/p&gt;
+&lt;p&gt;因此我们关闭 git 用户 shell 权限，执行：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;nano /etc/passwd
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;将最后一行的 &lt;code&gt;git:x:1001:1001:,,,:/home/git:/bin/bash&lt;/code&gt; 修改为 &lt;code&gt;git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这样，git 用户可以正常通过 ssh 使用 git，但无法登录 shell，因为我们为 git 用户指定的 git-shell 每次一登录就自动退出。&lt;/p&gt;
+&lt;h3 id=&#34;初始化-git-仓库&#34;&gt;&lt;a href=&#34;#初始化-git-仓库&#34; class=&#34;headerlink&#34; title=&#34;初始化 git 仓库&#34;&gt;&lt;/a&gt;初始化 git 仓库&lt;/h3&gt;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cd /home/git                # 切换到git用户目录
+mkdir blog.git              # 创建git仓库文件夹，以blog.git为例
+cd blog.git                 # 进入仓库目录
+git init --bare             # 使用--bare参数初始化为裸仓库，这样创建的仓库不包含工作区
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;注意：裸仓库没有工作区，因为服务器上的 Git 仓库纯粹是为了共享，所以不让用户直接登录到服务器上去改工作区，并且服务器上的 Git 仓库通常都以 .git 结尾。&lt;/p&gt;
+&lt;h3 id=&#34;创建网站目录&#34;&gt;&lt;a href=&#34;#创建网站目录&#34; class=&#34;headerlink&#34; title=&#34;创建网站目录&#34;&gt;&lt;/a&gt;创建网站目录&lt;/h3&gt;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cd /home/wwwroot/           # 切换目录
+# 由于我想直接将博客放在/home/wwwroot/下，所以并没有创建blog目录
+mkdir blog                  # 创建网站目录，以blog为例
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;配置-SSH&#34;&gt;&lt;a href=&#34;#配置-SSH&#34; class=&#34;headerlink&#34; title=&#34;配置 SSH&#34;&gt;&lt;/a&gt;配置 SSH&lt;/h3&gt;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cd /home/git                # 切换到git用户目录
+mkdir .ssh                  # 创建.ssh目录
+cd .ssh
+nano authorized_keys
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后将本地的公钥复制到 &lt;code&gt;authorized_keys&lt;/code&gt; 文件里 (公钥即本地执行 &lt;code&gt;cat ~/.ssh/id_rsa.pub&lt;/code&gt; （如 &lt;code&gt;C:/Users/Your User Name/.ssh/id_rsa.pub&lt;/code&gt;）查看的内容)。&lt;/p&gt;
+&lt;p&gt;如果本地没有公钥，可以在本地用 &lt;code&gt;ssh-keygen&lt;/code&gt; 命令生成一个新的 ssh 密钥对：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;ssh-keygen -t rsa -C &amp;quot;your_email@example.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;当系统提示输入文件名时，可以按 &lt;code&gt;Enter&lt;/code&gt; 键使用默认路径（通常是&lt;code&gt;~/.ssh/id_rsa&lt;/code&gt;），也可以指定一个新的路径。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;Generating public/private rsa key pair.
+Enter file in which to save the key (/home/username/.ssh/id_rsa): [Press Enter]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt; 你可以选择为私钥设置一个密码短语，以增加额外的安全性，这里可以直接按 &lt;code&gt;Enter&lt;/code&gt; 键跳过。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;Enter passphrase (empty for no passphrase): [Type a passphrase or press Enter]
+Enter same passphrase again: [Repeat the passphrase or press Enter]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;生成完成后，系统会告诉你密钥对已经生成并存储在指定路径中。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;Your identification has been saved in /home/username/.ssh/id_rsa.
+Your public key has been saved in /home/username/.ssh/id_rsa.pub.
+# Windows -&amp;gt; C:/Users/username/.ssh/id_rsa, C:/Users/username/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:... your_email@example.com
+The key&amp;#39;s randomart image is:
++---[RSA 2048]----+
+|    .==+.        |
+|    =.o.         |
+|   o  .          |
+|  .  . o.        |
+|   . oSo.o.      |
+|  E .oBo= .      |
+| .  .++.+ o      |
+|  o+.o . o       |
+|   +=o . .       |
++----[SHA256]-----+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;注意：收集所有需要登录的用户的公钥，就是他们自己的 &lt;code&gt;id_rsa.pub&lt;/code&gt; 文件，把所有公钥导入到 &lt;code&gt;/home/git/.ssh/authorized_keys&lt;/code&gt; 文件里，一行一个。&lt;/p&gt;
+&lt;p&gt;通常这样配置后，&lt;code&gt;hexo -d&lt;/code&gt; 部署就不需要输入密码了，而是通过证书校验身份。&lt;/p&gt;
+&lt;h3 id=&#34;用户组管理&#34;&gt;&lt;a href=&#34;#用户组管理&#34; class=&#34;headerlink&#34; title=&#34;用户组管理&#34;&gt;&lt;/a&gt;用户组管理&lt;/h3&gt;&lt;p&gt;查看 Nginx 运行用户：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cat /etc/nginx/nginx.conf | grep user
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出示例：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;user www-data;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;查看 Php-fpm 运行用户：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cat /etc/php/8.2/fpm/pool.d/www.conf | grep -E &amp;#39;^(user|group) =&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出示例：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;user = www-data
+group = www-data
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;创建用户组 &lt;code&gt;webgroup&lt;/code&gt; 并添加 &lt;code&gt;git&lt;/code&gt; 和 &lt;code&gt;www-data&lt;/code&gt; 到用户组：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;groupadd webgroup
+usermod -aG webgroup git
+usermod -aG webgroup www-data
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;更改文件夹的组：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;chgrp -R webgroup /home/wwwroot
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;更改文件和目录的所有者：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;chown -R git:git /home/git
+chown -R www-data:webgroup /home/wwwroot
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;设置文件夹和文件的权限：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;chmod -R 770 /home/git
+chmod -R 770 /home/wwwroot
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;设置 SGID 位，确保新创建的文件或文件夹自动继承该组：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# 只设置单层目录的方法
+# chmod g+s /home/git
+# chmod g+s /home/wwwroot
+
+# 递归设置所有子目录的 SGID 位
+find /home/git -type d -exec chmod g+s &amp;#123;&amp;#125; \;
+find /home/wwwroot -type d -exec chmod g+s &amp;#123;&amp;#125; \;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;安装配置-Nginx&#34;&gt;&lt;a href=&#34;#安装配置-Nginx&#34; class=&#34;headerlink&#34; title=&#34;安装配置 Nginx&#34;&gt;&lt;/a&gt;安装配置 Nginx&lt;/h2&gt;&lt;p&gt;由于我之前已经装过了 Nginx，可以参考前面的教程，以下nginx安装内容来源于网络，仅供参考。&lt;/p&gt;
+&lt;h3 id=&#34;安装-Nginx&#34;&gt;&lt;a href=&#34;#安装-Nginx&#34; class=&#34;headerlink&#34; title=&#34;安装 Nginx&#34;&gt;&lt;/a&gt;安装 Nginx&lt;/h3&gt;&lt;p&gt;执行：&lt;code&gt;apt-get install nginx&lt;/code&gt;，若输入 &lt;code&gt;nginx -V&lt;/code&gt; 可以看到 nginx 版本信息，则安装成功。&lt;/p&gt;
+&lt;h3 id=&#34;配置-nginx&#34;&gt;&lt;a href=&#34;#配置-nginx&#34; class=&#34;headerlink&#34; title=&#34;配置 nginx&#34;&gt;&lt;/a&gt;配置 nginx&lt;/h3&gt;&lt;p&gt;执行：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cd /etc/nginx/sites-available   # 切换目录
+cp default default.bak          # 备份默认配置
+nano default                    # 修改配置
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;参考配置文件内容：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;server &amp;#123;
+    listen 80 default;              # 默认监听80端口
+    root /home/wwwroot;             # 网站根目录
+    server_name nightfury.top, www.nightfury.top;  # 网址
+    access_log  /var/log/nginx/blog_access.log;
+    error_log   /var/log/nginx/blog_error.log;
+    error_page 404 =  /404.html;
+    
+    location ~* ^.+\.(ico|gif|jpg|jpeg|png)$ &amp;#123;
+        root /home/wwwroot;
+        access_log   off;
+        expires      1d;
+    &amp;#125;
+
+    location ~* ^.+\.(css|js|txt|xml|swf|wav)$ &amp;#123;
+        root /home/wwwroot;
+        access_log   off;
+        expires      10m;
+    &amp;#125;
+
+    location / &amp;#123;
+        root /home/wwwroot;
+        if (-f $request_filename) &amp;#123;
+        rewrite ^/(.*)$  /$1 break;
+        &amp;#125;
+    &amp;#125;
+
+    location /nginx_status &amp;#123;
+        stub_status on;
+        access_log off;
+    &amp;#125;
+&amp;#125;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;保存退出后，启动 nginx：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;systemctl start nginx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;设置开机自动启动：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;systemctl enable nginx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;查看运行状态：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;systemctl status nginx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;显示 running 表示成功运行。&lt;/p&gt;
+&lt;h2 id=&#34;配置-Git-Hooks&#34;&gt;&lt;a href=&#34;#配置-Git-Hooks&#34; class=&#34;headerlink&#34; title=&#34;配置 Git Hooks&#34;&gt;&lt;/a&gt;配置 Git Hooks&lt;/h2&gt;&lt;h3 id=&#34;创建-post-receive-文件&#34;&gt;&lt;a href=&#34;#创建-post-receive-文件&#34; class=&#34;headerlink&#34; title=&#34;创建 post-receive 文件&#34;&gt;&lt;/a&gt;创建 post-receive 文件&lt;/h3&gt;&lt;p&gt;root 用户下执行（或者 git 用户下执行，就不需要 &lt;code&gt;sudo -u git&lt;/code&gt;）&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cd /home/git/blog.git/hooks  # 切换到hooks目录下
+sudo -u git nano post-receive
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;复制下面的内容到 &lt;code&gt;post-receive&lt;/code&gt; 文件中：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;#!/bin/bash
+echo &amp;quot;post-receive hook is running...&amp;quot;
+
+GIT_REPO=/home/git/blog.git
+TMP_GIT_CLONE=/tmp/blog
+PUBLIC_WWW=/home/wwwroot
+
+rm -rf $&amp;#123;TMP_GIT_CLONE&amp;#125;
+git clone $GIT_REPO $TMP_GIT_CLONE
+# 如果想每次更新都删除掉原有所有内容则用下面这条命令
+# rm -rf $&amp;#123;PUBLIC_WWW&amp;#125;/*
+# 如果想每次更新都删除掉原有所有内容但排除掉一些文件（深度为1）则用下面这条命令（比如排除掉 .mp4 和 .png 文件）
+find $&amp;#123;PUBLIC_WWW&amp;#125; -maxdepth 1 -mindepth 1 ! -name &amp;#39;.mp4&amp;#39; ! -name &amp;#39;*.png&amp;#39; -exec rm -rf &amp;#123;&amp;#125; +
+cp -rf $&amp;#123;TMP_GIT_CLONE&amp;#125;/* $&amp;#123;PUBLIC_WWW&amp;#125;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;p&gt;为什么不直接将裸仓库克隆到 Web 根目录下呢？我之前也一直被这个问题困扰，感觉先克隆到 tmp 目录再拷贝到 Web 根目录是多此一举。后来我觉得可能是出于项目安全的考虑，在执行 cp 命令的时候，.git 作为隐藏目录不会被拷贝到 Web 根目录下，也就避免了将整个仓库历史暴露在 Web 服务中。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;赋予可执行权限：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;chmod +x post-receive
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;本地操作&#34;&gt;&lt;a href=&#34;#本地操作&#34; class=&#34;headerlink&#34; title=&#34;本地操作&#34;&gt;&lt;/a&gt;本地操作&lt;/h2&gt;&lt;h3 id=&#34;尝试连接&#34;&gt;&lt;a href=&#34;#尝试连接&#34; class=&#34;headerlink&#34; title=&#34;尝试连接&#34;&gt;&lt;/a&gt;尝试连接&lt;/h3&gt;&lt;p&gt;在本地打开 Git Bash：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;ssh git@VPS的ip
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;若默认端口不是 22，则需要在后面加上 -p 端口号：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;ssh git@VPS的ip -p 2024
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;由于前面配置了证书，所以正常应该是不需要输入密码了，如果仍然需要输入密码，请检查 &lt;code&gt;/home/git/.ssh&lt;/code&gt; 和 &lt;code&gt;/home/git/.ssh/authorized_keys&lt;/code&gt; 的权限和所属用户&amp;#x2F;组是否正确，可以用如下命令查询 ssh 日志：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;journalctl -u sshd -xe
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;ssh 连接成功后返回结果应该如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;-&amp;gt;ssh git@nightfury.top
+-&amp;gt;Linux XXX #1 SMP PREEMPT_DYNAMIC Debian XXX
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+fatal: Interactive git shell is not enabled.
+hint: ~/git-shell-commands should exist and have read and execute access.
+Connection to nightfury.top closed.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;提示无法登录 shell 是正常的，因为我们在之前就为 git 用户指定了 git-shell 每次一登录就自动退出。&lt;/p&gt;
+&lt;h2 id=&#34;配置-Hexo&#34;&gt;&lt;a href=&#34;#配置-Hexo&#34; class=&#34;headerlink&#34; title=&#34;配置 Hexo&#34;&gt;&lt;/a&gt;配置 Hexo&lt;/h2&gt;&lt;p&gt;打开本地博客根目录下的_config.yml 文件，找到最后的 deploy 配置，修改为：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;## Deployment
+
+## Docs: https://hexo.io/docs/deployment.html
+
+deploy:
+  - type: git
+    repo: git@github.com:szNightFury/szNightFury.github.io.git
+    branch: master
+  - type: git
+    repo: git@nightfury.top:/home/git/blog.git
+    branch: master
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;到此，Hexo 建站就全部配置部署完毕了。&lt;/p&gt;
+</content>
+        <category term="Configuration" scheme="https://nightfury.top/categories/Configuration/" />
+        <category term="Hexo" scheme="https://nightfury.top/tags/Hexo/" />
+        <category term="Debian" scheme="https://nightfury.top/tags/Debian/" />
+        <category term="Github" scheme="https://nightfury.top/tags/Github/" />
+        <updated>2024-07-04T04:34:08.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://nightfury.top/2024/07/04/Debian12%E9%85%8D%E7%BD%AENginx1.22%E4%B8%8EPhp8.2/</id>
+        <title>Debian12配置Nginx1.22与Php8.2</title>
+        <link rel="alternate" href="https://nightfury.top/2024/07/04/Debian12%E9%85%8D%E7%BD%AENginx1.22%E4%B8%8EPhp8.2/"/>
+        <content type="html">&lt;h1 id=&#34;实验环境&#34;&gt;&lt;a href=&#34;#实验环境&#34; class=&#34;headerlink&#34; title=&#34;实验环境&#34;&gt;&lt;/a&gt;实验环境&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;操作系统：Debian 12&lt;/li&gt;
+&lt;li&gt;Nginx：1.22.1&lt;/li&gt;
+&lt;li&gt;Php：8.2.20&lt;/li&gt;
+&lt;li&gt;Php-fpm：php8.2-fpm&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;实验步骤&#34;&gt;&lt;a href=&#34;#实验步骤&#34; class=&#34;headerlink&#34; title=&#34;实验步骤&#34;&gt;&lt;/a&gt;实验步骤&lt;/h1&gt;&lt;h2 id=&#34;安装程序包与依赖&#34;&gt;&lt;a href=&#34;#安装程序包与依赖&#34; class=&#34;headerlink&#34; title=&#34;安装程序包与依赖&#34;&gt;&lt;/a&gt;安装程序包与依赖&lt;/h2&gt;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# 更新软件包列表
+apt update
+
+# 安装程序包
+apt install nginx
+apt install php php-fpm php-xml php-json php-curl php-mbstring
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;配置Nginx&#34;&gt;&lt;a href=&#34;#配置Nginx&#34; class=&#34;headerlink&#34; title=&#34;配置Nginx&#34;&gt;&lt;/a&gt;配置Nginx&lt;/h2&gt;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# 查看 php-fpm 监听配置
+nano /etc/php/8.2/fpm/pool.d/www.conf
+# 41行取消注释：
+listen = /run/php/php8.2-fpm.sock
+
+nano /etc/nginx/conf.d/xxx.conf
+# 在 index.html 前面加入 index.php
+# 增加：
+location ~ \.php$ &amp;#123;
+	include snippets/fastcgi-php.conf;
+	fastcgi_pass unix:/run/php/php8.2-fpm.sock;	# 注意路径与前面的监听配置一致
+&amp;#125;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;修改时区&#34;&gt;&lt;a href=&#34;#修改时区&#34; class=&#34;headerlink&#34; title=&#34;修改时区&#34;&gt;&lt;/a&gt;修改时区&lt;/h2&gt;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# 查看当前时区
+timedatectl
+# 输出示例：
+Local time: Tue 2024-07-03 14:00:00 UTC
+Universal time: Tue 2024-07-03 14:00:00 UTC
+RTC time: Tue 2024-07-03 14:00:00
+Time zone: UTC (UTC, +0000)
+System clock synchronized: yes
+NTP service: active
+RTC in local TZ: no
+
+# 设置 PRC 时区
+timedatectl set-timezone Asia/Shanghai
+# 验证时区更改
+timedatectl
+# 输出示例：
+Local time: Tue 2024-07-03 22:00:00 CST
+Universal time: Tue 2024-07-03 14:00:00 UTC
+RTC time: Tue 2024-07-03 14:00:00
+Time zone: Asia/Shanghai (CST, +0800)
+System clock synchronized: yes
+NTP service: active
+RTC in local TZ: no
+
+# 配置 Php 时区
+nano /etc/php/8.2/fpm/php.ini
+# 979行增加
+date.timezone = Asia/Shanghai
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;重启服务&#34;&gt;&lt;a href=&#34;#重启服务&#34; class=&#34;headerlink&#34; title=&#34;重启服务&#34;&gt;&lt;/a&gt;重启服务&lt;/h2&gt;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;service php8.2-fpm restart # systemctl restart php8.2-fpm
+service nginx restart # systemctl restart nginx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;调试步骤&#34;&gt;&lt;a href=&#34;#调试步骤&#34; class=&#34;headerlink&#34; title=&#34;调试步骤&#34;&gt;&lt;/a&gt;调试步骤&lt;/h2&gt;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# 检查 Nginx 访问日志
+tail -f /var/log/nginx/access.log
+# 查看 Php-fpm 错误日志
+tail -f /var/log/php8.2-fpm.log
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;验收&#34;&gt;&lt;a href=&#34;#验收&#34; class=&#34;headerlink&#34; title=&#34;验收&#34;&gt;&lt;/a&gt;验收&lt;/h1&gt;&lt;p&gt;编写任意 php 文件，比如说简单的有 index.php：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;h1&amp;gt;
+    &amp;lt;span&amp;gt; Hello, this is test page &amp;lt;/span&amp;gt;
+&amp;lt;/h1&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;或者 php 探针：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;&amp;lt;?php 
+	phpinfo(); 
+?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;访问该 php 地址，得到正确的返回结果。完结，Move On！&lt;/p&gt;
+</content>
+        <category term="Configuration" scheme="https://nightfury.top/categories/Configuration/" />
+        <category term="Debian" scheme="https://nightfury.top/tags/Debian/" />
+        <category term="Php" scheme="https://nightfury.top/tags/Php/" />
+        <category term="Nginx" scheme="https://nightfury.top/tags/Nginx/" />
+        <updated>2024-07-04T03:59:23.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://nightfury.top/2023/09/11/table/</id>
+        <title>table</title>
+        <link rel="alternate" href="https://nightfury.top/2023/09/11/table/"/>
+        <content type="html">&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;refill&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;refillPush&lt;/td&gt;
+&lt;td&gt;refillPush&lt;/td&gt;
+&lt;td&gt;refillPush&lt;/td&gt;
+&lt;td&gt;refillPush&lt;/td&gt;
+&lt;td&gt;refillPush&lt;/td&gt;
+&lt;td&gt;refillPush&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;refillPush&lt;/td&gt;
+&lt;td&gt;refillPush&lt;/td&gt;
+&lt;td&gt;refillPush&lt;/td&gt;
+&lt;td&gt;refillPush&lt;/td&gt;
+&lt;td&gt;refillPush&lt;/td&gt;
+&lt;td&gt;refillPush&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;push&lt;/td&gt;
+&lt;td&gt;push&lt;/td&gt;
+&lt;td&gt;push&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;push&lt;/td&gt;
+&lt;td&gt;push&lt;/td&gt;
+&lt;td&gt;push&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;refillOrPush&lt;/td&gt;
+&lt;td&gt;refillOrPush&lt;/td&gt;
+&lt;td&gt;refillOrPush&lt;/td&gt;
+&lt;td&gt;refillOrPush&lt;/td&gt;
+&lt;td&gt;refillOrPush&lt;/td&gt;
+&lt;td&gt;refillOrPush&lt;/td&gt;
+&lt;td&gt;refillOrPush&lt;/td&gt;
+&lt;td&gt;refillOrPush&lt;/td&gt;
+&lt;td&gt;refillOrPush&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;refillOrPush&lt;/td&gt;
+&lt;td&gt;refillOrPush&lt;/td&gt;
+&lt;td&gt;refillOrPush&lt;/td&gt;
+&lt;td&gt;refillOrPush&lt;/td&gt;
+&lt;td&gt;refillOrPush&lt;/td&gt;
+&lt;td&gt;refillOrPush&lt;/td&gt;
+&lt;td&gt;refillOrPush&lt;/td&gt;
+&lt;td&gt;refillOrPush&lt;/td&gt;
+&lt;td&gt;refillOrPush&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;refill&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;reuse&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;refillPop&lt;/td&gt;
+&lt;td&gt;refillPop&lt;/td&gt;
+&lt;td&gt;refillPop&lt;/td&gt;
+&lt;td&gt;refillPop&lt;/td&gt;
+&lt;td&gt;refillPop&lt;/td&gt;
+&lt;td&gt;refillPop&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;orPush，orPop做判断&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;reusePop&lt;/td&gt;
+&lt;td&gt;reusePop&lt;/td&gt;
+&lt;td&gt;reusePop&lt;/td&gt;
+&lt;td&gt;reusePop&lt;/td&gt;
+&lt;td&gt;reusePop&lt;/td&gt;
+&lt;td&gt;reusePop&lt;/td&gt;
+&lt;td&gt;reusePop&lt;/td&gt;
+&lt;td&gt;reusePop&lt;/td&gt;
+&lt;td&gt;reusePop&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;pop&lt;/td&gt;
+&lt;td&gt;pop&lt;/td&gt;
+&lt;td&gt;pop&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;reusePush&lt;/td&gt;
+&lt;td&gt;reusePush&lt;/td&gt;
+&lt;td&gt;reusePush&lt;/td&gt;
+&lt;td&gt;reusePush&lt;/td&gt;
+&lt;td&gt;reusePush&lt;/td&gt;
+&lt;td&gt;reusePush&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;refillOrPop&lt;/td&gt;
+&lt;td&gt;refillOrPop&lt;/td&gt;
+&lt;td&gt;refillOrPop&lt;/td&gt;
+&lt;td&gt;refillOrPop&lt;/td&gt;
+&lt;td&gt;refillOrPop&lt;/td&gt;
+&lt;td&gt;refillOrPop&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;refillOrPop&lt;/td&gt;
+&lt;td&gt;refillOrPop&lt;/td&gt;
+&lt;td&gt;refillOrPop&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;reuseOrPush&lt;/td&gt;
+&lt;td&gt;reuseOrPush&lt;/td&gt;
+&lt;td&gt;reuseOrPush&lt;/td&gt;
+&lt;td&gt;reuseOrPush&lt;/td&gt;
+&lt;td&gt;reuseOrPush&lt;/td&gt;
+&lt;td&gt;reuseOrPush&lt;/td&gt;
+&lt;td&gt;reuseOrPush&lt;/td&gt;
+&lt;td&gt;reuseOrPush&lt;/td&gt;
+&lt;td&gt;reuseOrPush&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;reuseOrPop&lt;/td&gt;
+&lt;td&gt;reuseOrPop&lt;/td&gt;
+&lt;td&gt;reuseOrPop&lt;/td&gt;
+&lt;td&gt;reuseOrPop&lt;/td&gt;
+&lt;td&gt;reuseOrPop&lt;/td&gt;
+&lt;td&gt;reuseOrPop&lt;/td&gt;
+&lt;td&gt;reuseOrPop&lt;/td&gt;
+&lt;td&gt;reuseOrPop&lt;/td&gt;
+&lt;td&gt;reuseOrPop&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;orPush&lt;/td&gt;
+&lt;td&gt;orPush&lt;/td&gt;
+&lt;td&gt;orPush&lt;/td&gt;
+&lt;td&gt;orPush&lt;/td&gt;
+&lt;td&gt;orPush&lt;/td&gt;
+&lt;td&gt;orPush&lt;/td&gt;
+&lt;td&gt;orPush&lt;/td&gt;
+&lt;td&gt;orPush&lt;/td&gt;
+&lt;td&gt;orPush&lt;/td&gt;
+&lt;td&gt;orPush&lt;/td&gt;
+&lt;td&gt;orPush&lt;/td&gt;
+&lt;td&gt;orPush&lt;/td&gt;
+&lt;td&gt;orPush&lt;/td&gt;
+&lt;td&gt;orPush&lt;/td&gt;
+&lt;td&gt;orPush&lt;/td&gt;
+&lt;td&gt;orPush&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;orPop&lt;/td&gt;
+&lt;td&gt;orPop&lt;/td&gt;
+&lt;td&gt;orPop&lt;/td&gt;
+&lt;td&gt;orPop&lt;/td&gt;
+&lt;td&gt;orPop&lt;/td&gt;
+&lt;td&gt;orPop&lt;/td&gt;
+&lt;td&gt;orPop&lt;/td&gt;
+&lt;td&gt;orPop&lt;/td&gt;
+&lt;td&gt;orPop&lt;/td&gt;
+&lt;td&gt;orPop&lt;/td&gt;
+&lt;td&gt;orPop&lt;/td&gt;
+&lt;td&gt;orPop&lt;/td&gt;
+&lt;td&gt;orPop&lt;/td&gt;
+&lt;td&gt;orPop&lt;/td&gt;
+&lt;td&gt;orPop&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;orPush，orPop做判断&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+</content>
+        <category term="Paper" scheme="https://nightfury.top/categories/Paper/" />
+        <category term="Algorithm" scheme="https://nightfury.top/categories/Paper/Algorithm/" />
+        <category term="SNN" scheme="https://nightfury.top/tags/SNN/" />
+        <category term="FPGA" scheme="https://nightfury.top/tags/FPGA/" />
+        <category term="Hardware" scheme="https://nightfury.top/tags/Hardware/" />
+        <updated>2023-09-11T02:46:06.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://nightfury.top/2023/09/10/A-Low-Power-and-Low-Latency-FPGA-Based-Spiking-Neural-Network-Accelerator/</id>
+        <title>A Low Power and Low Latency FPGA-Based Spiking Neural Network Accelerator</title>
+        <link rel="alternate" href="https://nightfury.top/2023/09/10/A-Low-Power-and-Low-Latency-FPGA-Based-Spiking-Neural-Network-Accelerator/"/>
+        <content type="html">&lt;h1 id=&#34;A-Low-Power-and-Low-Latency-FPGA-Based-Spiking-Neural-Network-Accelerator&#34;&gt;&lt;a href=&#34;#A-Low-Power-and-Low-Latency-FPGA-Based-Spiking-Neural-Network-Accelerator&#34; class=&#34;headerlink&#34; title=&#34;A Low Power and Low Latency FPGA-Based Spiking Neural Network Accelerator&#34;&gt;&lt;/a&gt;A Low Power and Low Latency FPGA-Based Spiking Neural Network Accelerator&lt;/h1&gt;&lt;h2 id=&#34;摘要&#34;&gt;&lt;a href=&#34;#摘要&#34; class=&#34;headerlink&#34; title=&#34;摘要&#34;&gt;&lt;/a&gt;摘要&lt;/h2&gt;&lt;p&gt;翻译自 ChatGPT：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;脉冲神经网络（SNNs），被称为神经网络的第三代，因其生物合理性和类似大脑的特征而著名。最近的努力进一步展示了 SNN 在高速推断方面的潜力，通过设计具有时间或空间维度并行性的加速器。然而，由于硬件资源的限制，加速器设计必须利用片外内存来存储许多中间数据，这导致了高功耗和长延迟。本文侧重于层间数据流以提高算术效率。基于脉冲的离散特性，我们设计了一个卷积池化（CONVP）单元，&lt;strong&gt;将卷积层和池化层的处理合并&lt;/strong&gt;，以减少延迟和资源利用率。此外，对于全连接层，我们应用了&lt;strong&gt;内部输出并行性和跨输出并行性&lt;/strong&gt;来加速网络推理。我们通过在 Zynq XA7Z020 FPGA 上实现不同的 SNN 模型，并使用不同的数据集来展示我们提出的硬件架构的有效性。实验结果显示，我们的加速器在 MNIST 数据集上与 FPGA 实现相比，可以实现约 28 倍的推断速度提升，并在 DVSGesture 数据集上与 ASIC 设计相比，可以实现约 15 倍的推断速度提升，功耗较低。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;相关工作&#34;&gt;&lt;a href=&#34;#相关工作&#34; class=&#34;headerlink&#34; title=&#34;相关工作&#34;&gt;&lt;/a&gt;相关工作&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;使用 &lt;strong&gt;rate coding&lt;/strong&gt;，&lt;strong&gt;IF&lt;/strong&gt; 神经元模型，没给出具体的时间步是多少。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;设计方法&#34;&gt;&lt;a href=&#34;#设计方法&#34; class=&#34;headerlink&#34; title=&#34;设计方法&#34;&gt;&lt;/a&gt;设计方法&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;PC 端负责&lt;strong&gt;脉冲编码&lt;/strong&gt;，通过 UART 协议输出给 PL 端；PL 端负责&lt;strong&gt;网络推理&lt;/strong&gt;，&lt;strong&gt;对输入脉冲做 Line Buffer 做卷积（Adder Tree）&lt;/strong&gt;，输出结果再传回 PC 端进行验证，系统框图如图：&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/A-Low-Power-and-Low-Latency-FPGA-Based-Spiking-Neural-Network-Accelerator/%E7%B3%BB%E7%BB%9F%E6%A1%86%E5%9B%BE.png&#34; alt=&#34;系统框图&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;所谓的 CONVP 就是把 &lt;strong&gt;Conv 和 MaxPooling 融合&lt;/strong&gt;（呃呃不就是很常见的多加个 buffer 吗，而且作者所做的似乎是 Valid Conv ），然后做了 &lt;strong&gt;Intra-Row Pooling&lt;/strong&gt; 和 &lt;strong&gt;Inter-Row Pooling&lt;/strong&gt;，说白了就是比如做 MP2 的时候，第一行先做 Intra-Row Pooling，每两个做一次 OR 操作再写入 Buffer，在第二行的时候则作 Inter-Row Pooling，本来是应该读出第一行的 pooling 结果然后接着做 OR 操作的，但作者似乎是偷懒多开了一行 Buffer 再一一做 OR 操作，如图：&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/A-Low-Power-and-Low-Latency-FPGA-Based-Spiking-Neural-Network-Accelerator/MaxPooling.png&#34; alt=&#34;MaxPooling&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;卷积过程也有 &lt;strong&gt;Inter-Output Parallelism&lt;/strong&gt; 和 &lt;strong&gt;Intra-Output Parallelism&lt;/strong&gt;，其中 Intra-Output Parallelism 是把对某个神经元有贡献的权重（n bits）分成 k 个作为一组，即并行度为 k，经过 Ci &amp;#x2F; k 个 Clock 后就可以算完一个输出神经元的膜电势；Intra-Output Parallelism 没怎么理解，我估计是对上个 FC 层计算完的结果直接拿来做运算，而不需要存起来再被这层 FC 取出来作为 Input，如图：&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/A-Low-Power-and-Low-Latency-FPGA-Based-Spiking-Neural-Network-Accelerator/%E5%85%A8%E8%BF%9E%E6%8E%A5%E5%B9%B6%E8%A1%8C%E8%8C%83%E5%BC%8F.png&#34; alt=&#34;全连接并行范式&#34;&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/A-Low-Power-and-Low-Latency-FPGA-Based-Spiking-Neural-Network-Accelerator/%E5%85%A8%E8%BF%9E%E6%8E%A5%E6%9D%83%E9%87%8D%E5%AD%98%E5%82%A8.png&#34; alt=&#34;全连接权重存储&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;实验与评估&#34;&gt;&lt;a href=&#34;#实验与评估&#34; class=&#34;headerlink&#34; title=&#34;实验与评估&#34;&gt;&lt;/a&gt;实验与评估&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;在 Xilinx Zynq XA7Z020 FPGA 上进行了部署，Verilog 设计，8 bits 定点量化，100 MHz 时钟频率，性能对比如图：&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/A-Low-Power-and-Low-Latency-FPGA-Based-Spiking-Neural-Network-Accelerator/%E6%80%A7%E8%83%BD%E5%AF%B9%E6%AF%94.png&#34; alt=&#34;性能对比&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;其他也没啥好说的了，作者最后还对比了下 &lt;strong&gt;CONVP&lt;/strong&gt; 和 &lt;strong&gt;CONV-POOLING&lt;/strong&gt; 以及有无  &lt;strong&gt;Inter-Output Parallelism&lt;/strong&gt; 和 &lt;strong&gt;Intra-Output Parallelism&lt;/strong&gt; 的推理速率、资源使用率的差别，只能说增加了下工作量吧。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="Paper" scheme="https://nightfury.top/categories/Paper/" />
+        <category term="Algorithm" scheme="https://nightfury.top/categories/Paper/Algorithm/" />
+        <category term="SNN" scheme="https://nightfury.top/tags/SNN/" />
+        <category term="FPGA" scheme="https://nightfury.top/tags/FPGA/" />
+        <category term="Hardware" scheme="https://nightfury.top/tags/Hardware/" />
+        <updated>2023-09-10T07:36:45.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://nightfury.top/2023/09/07/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/</id>
+        <title>Efficient Hardware Acceleration of Sparsely Active Convolutional Spiking Neural Networks</title>
+        <link rel="alternate" href="https://nightfury.top/2023/09/07/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/"/>
+        <content type="html">&lt;h1 id=&#34;Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks&#34;&gt;&lt;a href=&#34;#Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks&#34; class=&#34;headerlink&#34; title=&#34;Efficient Hardware Acceleration of Sparsely Active Convolutional Spiking Neural Networks&#34;&gt;&lt;/a&gt;Efficient Hardware Acceleration of Sparsely Active Convolutional Spiking Neural Networks&lt;/h1&gt;&lt;h2 id=&#34;摘要&#34;&gt;&lt;a href=&#34;#摘要&#34; class=&#34;headerlink&#34; title=&#34;摘要&#34;&gt;&lt;/a&gt;摘要&lt;/h2&gt;&lt;p&gt;翻译自 ChatGPT：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;脉冲神经网络（SNNs）以事件驱动方式进行计算，以实现比标准神经网络更高效的计算。在 SNNs 中，神经元的输出不是编码为实值激活，而是编码为二进制脉冲序列。使用 SNNs 而不是传统神经网络的动机根植于脉冲处理的特殊计算方面，尤其是高度稀疏的脉冲。已经建立良好的卷积神经网络（CNNs）实现具有大型的处理元素（PEs）空间阵列，但在面对激活稀疏性时，它们的利用率仍然很低。我们提出了一种针对高度稀疏的卷积脉冲神经网络（CSNNs）进行优化的新型架构。&lt;strong&gt;所提出的架构包括一个与卷积内核大小相同的PE阵列以及一个智能脉冲队列，提供了高PE利用率&lt;/strong&gt;。通过将特征图压缩成可以逐个脉冲处理的队列，确保了脉冲的持续流动。这种压缩是在运行时执行的，导致了一种自时序调度。这使得处理时间可以随着脉冲数量的增加而扩展。此外，引入了一种新颖的内存组织方案，用于使用多个小型并行的片上 RAM 高效存储和检索各个神经元的膜电位。每个 RAM 都与其 PE 硬连线，减少了开关电路。我们在 FPGA 上实现了所提出的架构，并与以前提出的 SNN 实现相比实现了显著的加速（约 10 倍），同时需要更少的硬件资源并保持更高的能源效率（约 15 倍）。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;相关工作&#34;&gt;&lt;a href=&#34;#相关工作&#34; class=&#34;headerlink&#34; title=&#34;相关工作&#34;&gt;&lt;/a&gt;相关工作&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;使用 &lt;strong&gt;m-TTFS coding&lt;/strong&gt;，比 rate coding 时间步更短，相较于 TTFS 的只发射一次脉冲变成持续发送脉冲，虽然脉冲稀疏性降低了，但是不需要再积累膜电势了，仍然比 rate coding 更加高效。但是后面在讲 Thresholding Unit 的时候，又提到说 m-TTFS coding 只发射一次脉冲，前后矛盾！！暂且认为是笔误了，Threshoding Unit 对于膜电势做两个判断，一是是否超过阈值，二是特定的 bit 有没有 set，set 说明发射过脉冲，而在最后一个时间步时会 reset.&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/Coding%E7%9F%9B%E7%9B%BE1.png&#34; alt=&#34;Coding矛盾1&#34;&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/Coding%E7%9F%9B%E7%9B%BE2.png&#34; alt=&#34;Coding矛盾2&#34;&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;硬件架构&#34;&gt;&lt;a href=&#34;#硬件架构&#34; class=&#34;headerlink&#34; title=&#34;硬件架构&#34;&gt;&lt;/a&gt;硬件架构&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;卷积和全连接分成了两个部分硬件实现，不够优雅（你猜为什么测试用例在做 FC 之前卷积核个数锐减到 10 个？），系统框图如图：&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/%E7%B3%BB%E7%BB%9F%E6%A1%86%E5%9B%BE.png&#34; alt=&#34;系统框图&#34;&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;输出通道作为循环最外层&lt;/strong&gt;，先对某一通道做所有时间步的推理，然后将这些通道的 Spike 存入 AER 的表中。一层一层做，没有层间流水化：&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/%E6%8E%A8%E7%90%86%E5%BE%AA%E7%8E%AF.png&#34; alt=&#34;推理循环&#34;&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;硬件实现&#34;&gt;&lt;a href=&#34;#硬件实现&#34; class=&#34;headerlink&#34; title=&#34;硬件实现&#34;&gt;&lt;/a&gt;硬件实现&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;所谓的 &lt;strong&gt;Memory Interlacing&lt;/strong&gt;，就是只做 3×3 卷积（这篇文章对于 3×3 卷积做了很多特定的设计，非常之不通用，详见后文），且这 9 个格的 Spike 可以并行写入到 9 个 RAM 里作为 AER 表格（深度未知，需要 fmapSize &amp;#x2F; 9 × ChannelOut？） 。他的分块方式是这样的：对特征图 FMap 直接做 3×3 的分块，然后将分块内的 9 个元素编号后分别存在各自的 RAM 中，膜电势和权重也是分成 9 个部分，AER 表格存储方式如图：&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/%E5%86%85%E5%AD%98%E5%88%86%E5%9D%97.png&#34; alt=&#34;内存分块&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;卷积单元流程可以分为：&lt;strong&gt;计算地址 S1 → 读膜电势 S2 → 更新电势 S3 → 写膜电势 S4&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;计算 Spike 所产生的 Active 邻域地址的时候，作者对于 9 个输出地址与输入地址都做了相应的映射（对于 3×3 卷积设计非常的特质化！！或许有些情况可以合并，懒得深究了），如图为输入地址为(0, 0)[5]（$s_{in}&amp;#x3D;5$）到邻域 $s_{in}&amp;#x3D;1$ 的映射公式与示例：&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/%E9%82%BB%E5%9F%9F%E6%98%A0%E5%B0%84%E7%A4%BA%E4%BE%8B.png&#34; alt=&#34;邻域映射示例&#34;&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/%E9%82%BB%E5%9F%9F%E6%98%A0%E5%B0%84%E5%85%AC%E5%BC%8F.png&#34; alt=&#34;邻域映射公式&#34;&gt;&lt;/p&gt;
+&lt;p&gt;除此之外，由于这 9 个卷积核到 9 个 PE 的映射取决于输入脉冲地址（比如从蓝框到紫框，最左上角从序号 1 变成了序号 6，但权重位置其实没有变），所以它还需要 9 个 9 选 1 的 Mux 来做膜电势更新。 &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;更新电势的过程中考虑了上溢下溢的情况做了饱和操作，饱和操作对于 m-TTFS 而言影响不大，通过 &lt;strong&gt;check 符号位的变化&lt;/strong&gt;可以实现上下溢的判断，好评。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;卷积会遇到 S2 - S4，S3 - S4 的 &lt;strong&gt;Data Hazard&lt;/strong&gt;，为了避免这样的数据冒险，作者对 S2 - S4 的数据冒险（S4 写的膜电势地址与 S2 读的膜电势地址一致）做了 Bypass（意味着 9 个 2 选 1 的 Mux），因为 S4 计算完的膜电势刚好可以对 S2 用，而对于 S3 - S4 的数据冒险则是采用了对 S2，S1 做了阻塞，从而使得转换成 S2 - S4 的数据冒险类型，但这样其实是会空一拍。不过作者也说明了由于他是 0 - 9 的顺序去做的，所以其实也很难有同样地址的 S3 - S4 数据冒险。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;只支持 3×3 的 MaxPooling，垃圾。&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/MaxPooling.png&#34; alt=&#34;MaxPooling&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;实验与总结&#34;&gt;&lt;a href=&#34;#实验与总结&#34; class=&#34;headerlink&#34; title=&#34;实验与总结&#34;&gt;&lt;/a&gt;实验与总结&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;给出了不同并行度时的吞吐速率和功耗，进一步计算能效比，这样可以选择出合适的并行度，不错的思路。&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/%E8%83%BD%E6%95%88%E6%AF%94.png&#34; alt=&#34;能效比&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;8 bits 量化大概用了 60 个 36K BRAM，16 bits 量化大概用了 111 个 36K BRAM（网络本身很小，28×28-32C3-32C3-P3-10C3-F10，对于 8 bits 量化而言按道理权重需要 10 个 18K 而已，膜电势就算所有都全存储起来也只需要 50 个 18K，你在这用了 60 个 36 K 在干啥啊？？），时钟频率跑到 333 MHz，但用的是 UltraScale+ ZU7EV，这个器件比 ZU5EV 大了一倍多，只能说还可以吧。&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/%E8%B5%84%E6%BA%90%E5%88%A9%E7%94%A8%E7%8E%87.png&#34; alt=&#34;资源利用率&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;作者统计了下自己 PE 阵列的使用率，第二、三层都只有 50+ 的使用率，这依然不妨碍作者夸自己的 PE 使用率高。&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/PE%E4%BD%BF%E7%94%A8%E7%8E%87.png&#34; alt=&#34;PE使用率&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;性能对比：&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/%E6%80%A7%E8%83%BD%E5%AF%B9%E6%AF%94.png&#34; alt=&#34;性能对比&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;结论&#34;&gt;&lt;a href=&#34;#结论&#34; class=&#34;headerlink&#34; title=&#34;结论&#34;&gt;&lt;/a&gt;结论&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;结论部分说自己的 neuron multiplexing 是为了降低膜电势的存储占用问题的？？？&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/%E8%BF%B7%E6%83%91.png&#34; alt=&#34;迷惑&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;通信作者是 IEEE Fellow，以及&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/Efficient-Hardware-Acceleration-of-Sparsely-Active-Convolutional-Spiking-Neural-Networks/%E6%8E%A5%E6%94%B6%E6%97%A5%E6%9C%9F.png&#34; alt=&#34;接收日期&#34;&gt;&lt;/p&gt;
+&lt;p&gt;dddd，哈哈。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="Paper" scheme="https://nightfury.top/categories/Paper/" />
+        <category term="Algorithm" scheme="https://nightfury.top/categories/Paper/Algorithm/" />
+        <category term="SNN" scheme="https://nightfury.top/tags/SNN/" />
+        <category term="FPGA" scheme="https://nightfury.top/tags/FPGA/" />
+        <category term="Hardware" scheme="https://nightfury.top/tags/Hardware/" />
+        <updated>2023-09-07T12:46:18.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://nightfury.top/2023/08/18/StreamFifo/</id>
+        <title>StreamFifo</title>
+        <link rel="alternate" href="https://nightfury.top/2023/08/18/StreamFifo/"/>
+        <content type="html">&lt;h1 id=&#34;StreamFifo&#34;&gt;&lt;a href=&#34;#StreamFifo&#34; class=&#34;headerlink&#34; title=&#34;StreamFifo&#34;&gt;&lt;/a&gt;StreamFifo&lt;/h1&gt;&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import spinal.core._
+import spinal.lib._
+
+import scala.language.postfixOps
+
+trait StreamReuseFifoInterface[T &amp;lt;: Data]&amp;#123;
+  def push          : Stream[T]
+  def pop           : Stream[T]
+  def pushOccupancy : UInt
+  def popOccupancy  : UInt
+&amp;#125;
+
+object StreamReuseFifo&amp;#123;
+  def apply[T &amp;lt;: Data](dataType: HardType[T],
+                       depth: Int,
+                       latency : Int = 2,
+                       forFMax : Boolean = false) = &amp;#123;
+    assert(latency &amp;gt;= 0 &amp;amp;&amp;amp; latency &amp;lt;= 2)
+    new StreamFifo(
+      dataType,
+      depth,
+      withAsyncRead = latency &amp;lt; 2,
+      withBypass = latency == 0,
+      forFMax = forFMax
+    )
+  &amp;#125;
+&amp;#125;
+
+/**
+ * Fully redesigned in release 1.8.2 allowing improved timing closure.
+ * - latency of 0, 1, 2 cycles
+ *
+ * @param dataType
+ * @param depth Number of element stored in the fifo, Note that if withAsyncRead==false, then one extra transaction can be stored
+ * @param withAsyncRead Read the memory using asyncronous read port (ex distributed ram). If false, add 1 cycle latency
+ * @param withBypass Bypass the push port to the pop port when the fifo is empty. If false, add 1 cycle latency
+ *                   Only available if withAsyncRead == true
+ * @param forFMax Tune the design to get the maximal clock frequency
+ * @param useVec Use an Vec of register instead of a Mem to store the content
+ *               Only available if withAsyncRead == true
+ */
+class StreamReuseFifo[T &amp;lt;: Data](val dataType: HardType[T],
+                            val depth: Int,
+                            val withAsyncRead : Boolean = false,
+                            val withBypass : Boolean = false,
+                            val allowExtraMsb : Boolean = true,
+                            val forFMax : Boolean = false,
+                            val useVec : Boolean = false) extends Component &amp;#123;
+  require(depth &amp;gt;= 0)
+
+  if(withBypass) require(withAsyncRead)
+  if(useVec) require (withAsyncRead)
+
+  val io = new Bundle with StreamReuseFifoInterface[T]&amp;#123;
+    val push = slave Stream (dataType)
+    val pop = master Stream (dataType)
+    val flush = in Bool() default(False)
+    val occupancy    = out UInt (log2Up(depth + 1) bits)
+    val availability = out UInt (log2Up(depth + 1) bits)
+    override def pushOccupancy = occupancy
+    override def popOccupancy = occupancy
+  &amp;#125;
+
+  class CounterUpDownFmax(states : BigInt, init : BigInt) extends Area&amp;#123;
+    val incr, decr = Bool()
+    val value = Reg(UInt(log2Up(states) bits)) init(init)
+    val plusOne = KeepAttribute(value + 1)
+    val minusOne = KeepAttribute(value - 1)
+    when(incr =/= decr)&amp;#123;
+      value := incr.mux(plusOne, minusOne)
+    &amp;#125;
+    when(io.flush) &amp;#123; value := init &amp;#125;
+  &amp;#125;
+
+  val withExtraMsb = allowExtraMsb &amp;amp;&amp;amp; isPow2(depth)
+  val bypass = (depth == 0) generate new Area &amp;#123;
+    io.push &amp;gt;&amp;gt; io.pop
+    io.occupancy := 0
+    io.availability := 0
+  &amp;#125;
+  val oneStage = (depth == 1) generate new Area &amp;#123;
+    val doFlush = CombInit(io.flush)
+    val buffer = io.push.m2sPipe(flush = doFlush)
+    io.pop &amp;lt;&amp;lt; buffer
+    io.occupancy := U(buffer.valid)
+    io.availability := U(!buffer.valid)
+
+    if(withBypass)&amp;#123;
+      when(!buffer.valid)&amp;#123;
+        io.pop.valid := io.push.valid
+        io.pop.payload := io.push.payload
+        doFlush setWhen(io.pop.ready)
+        // 这里doFlush拉高是因为m2sPipe的rValid=RegNextWhen(self.valid, self.ready) init(False)
+        // 而由于bypass的缘故, rValid不应该采样当前的self.valid, 因此doFlush拉高, rValid clearWhen(flush)
+      &amp;#125;
+    &amp;#125;
+  &amp;#125;
+  val logic = (depth &amp;gt; 1) generate new Area &amp;#123;
+    val vec = useVec generate Vec(Reg(dataType), depth)
+    val ram = !useVec generate Mem(dataType, depth)
+
+    val ptr = new Area&amp;#123;
+      val doPush, doPop = Bool()  // 这两个信号都是对内部Ram而言的,其中doPush就是io.push.fire,仅在bypass情况有所不同
+      val full, empty = Bool()
+      val push = Reg(UInt(log2Up(depth) + withExtraMsb.toInt bits)) init(0)
+      val pop  = Reg(UInt(log2Up(depth) + withExtraMsb.toInt bits)) init(0)
+      val occupancy = cloneOf(io.occupancy)
+      val popOnIo = cloneOf(pop) // Used to track the global occupancy of the fifo (the extra buffer of !withAsyncRead)
+      val wentUp = RegNextWhen(doPush, doPush =/= doPop) init(False) clearWhen (io.flush)
+      // pop只是针对内部而言的, pop会在ram做pop操作后更改指针, 但pop操作到读结束还有latency, 因此用popOnIo记录读结束的指针
+
+      val arb = new Area &amp;#123;
+        // full是为了反压push的, pop相当于提前生成了读地址, 而popOnIo则是外部fire时的读地址
+        // 因此full信号不用pop信号是因为他所指的指针可能并未真正的读(pop通常会比popOnIo多1)
+        // empty是用于pop的valid信号的(准确来说是直接提供给addressGen), 但empty信号
+        // 对外部并不暴露, 因此能否做pop操作只需要根据对内部的pop和push做判断即可
+        val area = !forFMax generate &amp;#123;
+          withExtraMsb match &amp;#123;
+            case true =&amp;gt; &amp;#123; //as we have extra MSB, we don&amp;#39;t need the &amp;quot;wentUp&amp;quot;
+              full := (push ^ popOnIo ^ depth) === 0  // full时push=popOnIo=depth
+              empty := push === pop
+            &amp;#125;
+            case false =&amp;gt; &amp;#123;
+              full := push === popOnIo &amp;amp;&amp;amp; wentUp
+              empty := push === pop &amp;amp;&amp;amp; !wentUp
+            &amp;#125;
+          &amp;#125;
+        &amp;#125;
+
+        val fmax = forFMax generate new Area &amp;#123;
+          val counterWidth = log2Up(depth) + 1
+          // empty对内部而言(为了pop)
+          val emptyTracker = new CounterUpDownFmax(1 &amp;lt;&amp;lt; counterWidth, 1 &amp;lt;&amp;lt; (counterWidth - 1)) &amp;#123;
+            incr := doPop
+            decr := doPush
+            empty := value.msb
+          &amp;#125;
+          // full对外部而言(为了push)
+          val fullTracker = new CounterUpDownFmax(1 &amp;lt;&amp;lt; counterWidth, (1 &amp;lt;&amp;lt; (counterWidth - 1)) - depth) &amp;#123;
+            incr := io.push.fire
+            decr := io.pop.fire
+            full := value.msb
+          &amp;#125;
+        &amp;#125;
+      &amp;#125;
+
+
+      when(doPush)&amp;#123;
+        push := push + 1
+        if(!isPow2(depth)) when(push === depth - 1)&amp;#123; push := 0 &amp;#125;
+      &amp;#125;
+      when(doPop)&amp;#123;
+        pop := pop + 1
+        if(!isPow2(depth)) when(pop === depth - 1)&amp;#123; pop := 0 &amp;#125;
+      &amp;#125;
+
+      when(io.flush)&amp;#123;
+        push := 0
+        pop := 0
+      &amp;#125;
+
+
+      val forPow2 = (withExtraMsb &amp;amp;&amp;amp; !forFMax) generate new Area&amp;#123;
+        occupancy := push - popOnIo  //if no extra msb, could be U(full ## (push - popOnIo))
+      &amp;#125;
+
+      val notPow2 = (!withExtraMsb &amp;amp;&amp;amp; !forFMax) generate new Area&amp;#123;
+        val counter = Reg(UInt(log2Up(depth + 1) bits)) init(0)
+        counter := counter + U(io.push.fire) - U(io.pop.fire)
+        occupancy := counter
+
+        when(io.flush) &amp;#123; counter := 0 &amp;#125;
+      &amp;#125;
+      val fmax = forFMax generate new CounterUpDownFmax(depth + 1, 0)&amp;#123;
+        incr := io.push.fire
+        decr := io.pop.fire
+        occupancy := value
+      &amp;#125;
+    &amp;#125;
+
+    val push = new Area &amp;#123;
+      io.push.ready := !ptr.full
+      ptr.doPush := io.push.fire
+      val onRam = !useVec generate new Area &amp;#123;
+        val write = ram.writePort()
+        write.valid := io.push.fire
+        write.address := ptr.push.resized
+        write.data := io.push.payload
+      &amp;#125;
+      val onVec = useVec generate new Area &amp;#123;
+        when(io.push.fire)&amp;#123;
+          vec.write(ptr.push.resized, io.push.payload)
+        &amp;#125;
+      &amp;#125;
+    &amp;#125;
+
+    val pop = new Area&amp;#123;
+      val addressGen = Stream(UInt(log2Up(depth) bits))
+      addressGen.valid := !ptr.empty
+      addressGen.payload := ptr.pop.resized
+      ptr.doPop := addressGen.fire
+
+      val sync = !withAsyncRead generate new Area&amp;#123;
+        assert(!useVec)
+        val readArbitration = addressGen.m2sPipe(flush = io.flush)   // valid和读地址打一拍
+        val readPort = ram.readSyncPort   // 同样的是1 cycle delay
+        readPort.cmd := addressGen.toFlowFire   // toFlowFire, 读的时候不需要ready
+        io.pop &amp;lt;&amp;lt; readArbitration.translateWith(readPort.rsp)   // valid打一拍后payload替换成读数据
+
+        val popReg = RegNextWhen(ptr.pop, readArbitration.fire) init(0)
+        ptr.popOnIo := popReg   // 读结束后采样pop指针
+        when(io.flush)&amp;#123; popReg := 0 &amp;#125;
+      &amp;#125;
+
+      val async = withAsyncRead generate new Area&amp;#123;
+        val readed = useVec match &amp;#123;
+          case true =&amp;gt; vec.read(addressGen.payload)
+          case false =&amp;gt; ram.readAsync(addressGen.payload)
+        &amp;#125;
+        io.pop &amp;lt;&amp;lt; addressGen.translateWith(readed)
+        ptr.popOnIo := ptr.pop
+
+        if(withBypass)&amp;#123;
+          when(ptr.empty)&amp;#123;
+            io.pop.valid := io.push.valid
+            io.pop.payload := io.push.payload
+            ptr.doPush clearWhen(io.pop.ready)
+          &amp;#125;
+        &amp;#125;
+      &amp;#125;
+    &amp;#125;
+
+    io.occupancy := ptr.occupancy
+    if(!forFMax) io.availability := depth - ptr.occupancy
+    val fmaxAvail = forFMax generate new CounterUpDownFmax(depth + 1, depth)&amp;#123;
+      incr := io.pop.fire
+      decr := io.push.fire
+      io.availability := value
+    &amp;#125;
+  &amp;#125;
+
+
+
+  // check a condition against all valid payloads in the FIFO RAM
+  def formalCheckRam(cond: T =&amp;gt; Bool): Vec[Bool] = this rework new Composite(this)&amp;#123;
+    val condition = (0 until depth).map(x =&amp;gt; cond(if (useVec) logic.vec(x) else logic.ram(x)))
+    // create mask for all valid payloads in FIFO RAM
+    // inclusive [popd_idx, push_idx) exclusive
+    // assume FIFO RAM is full with valid payloads
+    //           [ ...  push_idx ... ]
+    //           [ ...  pop_idx  ... ]
+    // mask      [ 1 1 1 1 1 1 1 1 1 ]
+    val mask = Vec(True, depth)
+    val push_idx = logic.ptr.push.resize(log2Up(depth))
+    val pop_idx = logic.ptr.pop.resize(log2Up(depth))
+    // pushMask(i)==0 indicates location i was popped
+    val popMask = (~((U(1) &amp;lt;&amp;lt; pop_idx) - 1)).asBits
+    // pushMask(i)==1 indicates location i was pushed
+    val pushMask = ((U(1) &amp;lt;&amp;lt; push_idx) - 1).asBits
+    // no wrap   [ ... popd_idx ... push_idx ... ]
+    // popMask   [ 0 0 1 1 1 1  1 1 1 1 1 1 1 1 1]
+    // pushpMask [ 1 1 1 1 1 1  1 1 0 0 0 0 0 0 0] &amp;amp;
+    // mask      [ 0 0 1 1 1 1  1 1 0 0 0 0 0 0 0]
+    when(pop_idx &amp;lt; push_idx) &amp;#123;
+      mask.assignFromBits(pushMask &amp;amp; popMask)
+      // wrapped   [ ... push_idx ... popd_idx ... ]
+      // popMask   [ 0 0 0 0 0 0  0 0 1 1 1 1 1 1 1]
+      // pushpMask [ 1 1 0 0 0 0  0 0 0 0 0 0 0 0 0] |
+      // mask      [ 1 1 0 0 0 0  0 0 1 1 1 1 1 1 1]
+    &amp;#125;.elsewhen(pop_idx &amp;gt; push_idx) &amp;#123;
+      mask.assignFromBits(pushMask | popMask)
+      // empty?
+      //           [ ...  push_idx ... ]
+      //           [ ...  pop_idx  ... ]
+      // mask      [ 0 0 0 0 0 0 0 0 0 ]
+    &amp;#125;.elsewhen(logic.ptr.empty) &amp;#123;
+      mask := mask.getZero
+    &amp;#125;
+    val check = mask.zipWithIndex.map&amp;#123;case (x, id) =&amp;gt; x &amp;amp; condition(id)&amp;#125;
+    val vec = Vec(check)
+  &amp;#125;.vec
+
+  def formalCheckOutputStage(cond: T =&amp;gt; Bool): Bool = this.rework &amp;#123;
+    // only with sync RAM read, io.pop is directly connected to the m2sPipe() stage
+    Bool(!withAsyncRead) &amp;amp; io.pop.valid &amp;amp; cond(io.pop.payload)
+  &amp;#125;
+
+  // verify this works, then we can simplify below
+  //def formalCheck(cond: T =&amp;gt; Bool): Vec[Bool] = this.rework &amp;#123;
+  //  Vec(formalCheckOutputStage(cond) +: formalCheckRam(cond))
+  //&amp;#125;
+
+  def formalContains(word: T): Bool = this.rework &amp;#123;
+    formalCheckRam(_ === word.pull()).reduce(_ || _) || formalCheckOutputStage(_ === word.pull())
+  &amp;#125;
+  def formalContains(cond: T =&amp;gt; Bool): Bool = this.rework &amp;#123;
+    formalCheckRam(cond).reduce(_ || _) || formalCheckOutputStage(cond)
+  &amp;#125;
+
+  def formalCount(word: T): UInt = this.rework &amp;#123;
+    // occurance count in RAM and in m2sPipe()
+    CountOne(formalCheckRam(_ === word.pull())) +^ U(formalCheckOutputStage(_ === word.pull()))
+  &amp;#125;
+  def formalCount(cond: T =&amp;gt; Bool): UInt = this.rework &amp;#123;
+    // occurance count in RAM and in m2sPipe()
+    CountOne(formalCheckRam(cond)) +^ U(formalCheckOutputStage(cond))
+  &amp;#125;
+
+  def formalFullToEmpty() = this.rework &amp;#123;
+    val was_full = RegInit(False) setWhen(!io.push.ready)
+    cover(was_full &amp;amp;&amp;amp; logic.ptr.empty)
+  &amp;#125;
+&amp;#125;
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+        <category term="Technique" scheme="https://nightfury.top/categories/Technique/" />
+        <category term="Draft" scheme="https://nightfury.top/categories/Technique/Draft/" />
+        <category term="FPGA" scheme="https://nightfury.top/tags/FPGA/" />
+        <category term="SpinalHDL" scheme="https://nightfury.top/tags/SpinalHDL/" />
+        <updated>2023-08-18T09:38:12.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://nightfury.top/2023/08/15/Memory%20Layout%20Analysis/</id>
+        <title>Memory Layout Analysis</title>
+        <link rel="alternate" href="https://nightfury.top/2023/08/15/Memory%20Layout%20Analysis/"/>
+        <content type="html">&lt;h1 id=&#34;Memory-Layout-Analysis&#34;&gt;&lt;a href=&#34;#Memory-Layout-Analysis&#34; class=&#34;headerlink&#34; title=&#34;Memory Layout Analysis&#34;&gt;&lt;/a&gt;Memory Layout Analysis&lt;/h1&gt;&lt;h2 id=&#34;Voltage-Membrane&#34;&gt;&lt;a href=&#34;#Voltage-Membrane&#34; class=&#34;headerlink&#34; title=&#34;Voltage Membrane&#34;&gt;&lt;/a&gt;Voltage Membrane&lt;/h2&gt;&lt;p&gt;$$&lt;br&gt;Total&amp;#x3D;Co \times H_v \times W_v&lt;br&gt;$$&lt;br&gt;$$&lt;br&gt;Burst&amp;#x3D;H_k&lt;br&gt;$$&lt;/p&gt;
+&lt;h2 id=&#34;Kernel-Weight&#34;&gt;&lt;a href=&#34;#Kernel-Weight&#34; class=&#34;headerlink&#34; title=&#34;Kernel Weight&#34;&gt;&lt;/a&gt;Kernel Weight&lt;/h2&gt;&lt;p&gt;$$&lt;br&gt;Total&amp;#x3D;Co \times Ci \times H_k \times W_k&lt;br&gt;$$&lt;br&gt;$$&lt;br&gt;Burst&amp;#x3D;Ci \times S \times H_k \times W_k&lt;br&gt;$$&lt;/p&gt;
+&lt;h2 id=&#34;Mixed&#34;&gt;&lt;a href=&#34;#Mixed&#34; class=&#34;headerlink&#34; title=&#34;Mixed&#34;&gt;&lt;/a&gt;Mixed&lt;/h2&gt;&lt;p&gt;$$&lt;br&gt;Parameter\ Unit &amp;#x3D;\frac{H_v \times W_v}{H_k \times W_k} + Ci&lt;br&gt;$$&lt;/p&gt;
+</content>
+        <category term="Algorithm" scheme="https://nightfury.top/categories/Algorithm/" />
+        <category term="Draft" scheme="https://nightfury.top/categories/Algorithm/Draft/" />
+        <category term="FPGA" scheme="https://nightfury.top/tags/FPGA/" />
+        <category term="SpinalHDL" scheme="https://nightfury.top/tags/SpinalHDL/" />
+        <updated>2023-08-15T02:38:12.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://nightfury.top/2023/08/14/Hexo%E9%83%A8%E7%BD%B2%E5%88%B0VPS/</id>
+        <title>Hexo部署到VPS</title>
+        <link rel="alternate" href="https://nightfury.top/2023/08/14/Hexo%E9%83%A8%E7%BD%B2%E5%88%B0VPS/"/>
+        <content type="html">&lt;p&gt;网上大部分教程都是将 Hexo 部署到 GitHub Pages 上面，本文主要介绍如何部署到 VPS。&lt;/p&gt;
+&lt;p&gt;VPS 环境：Ubuntu 18.04。&lt;/p&gt;
+&lt;h1 id=&#34;准备工作&#34;&gt;&lt;a href=&#34;#准备工作&#34; class=&#34;headerlink&#34; title=&#34;准备工作&#34;&gt;&lt;/a&gt;准备工作&lt;/h1&gt;&lt;p&gt;网上流传的武功秘籍分为两种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将 Hexo 项目上传到 VPS 上面后执行 &lt;code&gt;hexo server&lt;/code&gt;，之后配置 Nginx 反向代理，让域名指向 &lt;a href=&#34;http://localhost:4000。&#34;&gt;http://localhost:4000。&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;将 Hexo 在本地通过 &lt;code&gt;hexo generate&lt;/code&gt; 生成静态文件，在通过 &lt;code&gt;hexo deploy&lt;/code&gt; 部署到 VPS 上面，使用 Nginx 直接做 Web 服务器。&lt;/li&gt;
+&lt;li&gt;相比第二种方式，第一种每次写博客与更新博客时候的操作会很繁琐。所以我们使用第二种方式进行部署，这样既可以将静态文件 deploy 到 VPS 上，也可以上传到 Github 上用作备份，操作性和安全性上都要胜于前者。&lt;/li&gt;
+&lt;li&gt;而对于第二种方式而言，常用的又有 &lt;code&gt;git hook&lt;/code&gt; 和 &lt;code&gt;rsync &lt;/code&gt;两种自动部署解决方案。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本文主要介绍 &lt;code&gt;git hook&lt;/code&gt; 部署过程。&lt;/p&gt;
+&lt;h1 id=&#34;Git-Hooks-自动部署&#34;&gt;&lt;a href=&#34;#Git-Hooks-自动部署&#34; class=&#34;headerlink&#34; title=&#34;Git Hooks 自动部署&#34;&gt;&lt;/a&gt;Git Hooks 自动部署&lt;/h1&gt;&lt;h2 id=&#34;部署原理&#34;&gt;&lt;a href=&#34;#部署原理&#34; class=&#34;headerlink&#34; title=&#34;部署原理&#34;&gt;&lt;/a&gt;部署原理&lt;/h2&gt;&lt;p&gt;我们在本地编辑文本，然后使用 Git 远程部署到 VPS 的 Git 仓库。&lt;code&gt;hexo d&lt;/code&gt; 命令实际上只 deploy 了本地的 public 文件夹，Git Hooks 实际上就是当 Git 仓库收到最新的 push 时，将 Git 仓库接受到的内容复制到 VPS 上的网站目录内。相当于完成了手动将 public 文件夹复制到 VPS 的网站根目录里。&lt;/p&gt;
+&lt;h2 id=&#34;安装配置-Git&#34;&gt;&lt;a href=&#34;#安装配置-Git&#34; class=&#34;headerlink&#34; title=&#34;安装配置 Git&#34;&gt;&lt;/a&gt;安装配置 Git&lt;/h2&gt;&lt;h3 id=&#34;安装-Git&#34;&gt;&lt;a href=&#34;#安装-Git&#34; class=&#34;headerlink&#34; title=&#34;安装 Git&#34;&gt;&lt;/a&gt;安装 Git&lt;/h3&gt;&lt;p&gt;通过 SSH 连接 VPS，执行：&lt;code&gt;apt-get install git&lt;/code&gt;，完成后通过 &lt;code&gt;git --version&lt;/code&gt; 查看 Git 版本，若显示版本信息则说明安装成功。&lt;/p&gt;
+&lt;h3 id=&#34;创建-git-用户&#34;&gt;&lt;a href=&#34;#创建-git-用户&#34; class=&#34;headerlink&#34; title=&#34;创建 git 用户&#34;&gt;&lt;/a&gt;创建 git 用户&lt;/h3&gt;&lt;p&gt;执行：&lt;code&gt;adduser git&lt;/code&gt;，根据提示设置密码。&lt;/p&gt;
+&lt;h3 id=&#34;赋予-git-用户-sudo-权限&#34;&gt;&lt;a href=&#34;#赋予-git-用户-sudo-权限&#34; class=&#34;headerlink&#34; title=&#34;赋予 git 用户 sudo 权限&#34;&gt;&lt;/a&gt;赋予 git 用户 sudo 权限&lt;/h3&gt;&lt;p&gt;执行：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;chmod 740 /etc/sudoers
+vim /etc/sudoers
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;找到以下内容：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;## User privilege specification
+root ALL=(ALL:ALL) ALL
+# 在 root ALL=(ALL:ALL) ALL 这一行下面添加
+git ALL=(ALL:ALL) ALL
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;保存退出后，修改回文件权限：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;chmod 440 /etc/sudoers
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;关闭-git-用户-shell-权限&#34;&gt;&lt;a href=&#34;#关闭-git-用户-shell-权限&#34; class=&#34;headerlink&#34; title=&#34;关闭 git 用户 shell 权限&#34;&gt;&lt;/a&gt;关闭 git 用户 shell 权限&lt;/h3&gt;&lt;p&gt;我们也可以通过：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;ssh git@VPS IP
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;ssh 连接服务器，登录到服务器上，对服务器进行各种操作，这通常很不安全，也不合适，我们只需要能对仓库操作就可以了，不需要更大的权限。&lt;/p&gt;
+&lt;p&gt;因此我们关闭 git 用户 shell 权限，执行：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;vim /etc/passwd
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;将最后一行的 &lt;code&gt;git:x:1001:1001:,,,:/home/git:/bin/bash&lt;/code&gt; 修改为 &lt;code&gt;git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这样，git 用户可以正常通过 ssh 使用 git，但无法登录 shell，因为我们为 git 用户指定的 git-shell 每次一登录就自动退出。&lt;/p&gt;
+&lt;h3 id=&#34;初始化-git-仓库&#34;&gt;&lt;a href=&#34;#初始化-git-仓库&#34; class=&#34;headerlink&#34; title=&#34;初始化 git 仓库&#34;&gt;&lt;/a&gt;初始化 git 仓库&lt;/h3&gt;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cd /home/git                //切换到git用户目录
+mkdir blog.git              //创建git仓库文件夹，以blog.git为例
+cd blog.git                 //进入仓库目录
+git init --bare             //使用--bare参数初始化为裸仓库，这样创建的仓库不包含工作区
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;注意：裸仓库没有工作区，因为服务器上的 Git 仓库纯粹是为了共享，所以不让用户直接登录到服务器上去改工作区，并且服务器上的 Git 仓库通常都以.git 结尾。&lt;/p&gt;
+&lt;h3 id=&#34;创建网站目录&#34;&gt;&lt;a href=&#34;#创建网站目录&#34; class=&#34;headerlink&#34; title=&#34;创建网站目录&#34;&gt;&lt;/a&gt;创建网站目录&lt;/h3&gt;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cd /home/wwwroot/                //切换目录
+# 由于我想直接将博客放在/home/wwwroot/下，所以并没有创建blog目录
+mkdir blog                  //创建网站目录，以blog为例
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;配置-SSH&#34;&gt;&lt;a href=&#34;#配置-SSH&#34; class=&#34;headerlink&#34; title=&#34;配置 SSH&#34;&gt;&lt;/a&gt;配置 SSH&lt;/h3&gt;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cd /home/git                //切换到git用户目录
+mkdir .ssh                  //创建.ssh目录
+cd .ssh
+vim authorized_keys
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后将本地的公钥复制到 &lt;code&gt;authorized_keys&lt;/code&gt; 文件里 (公钥即本地执行 &lt;code&gt;cat ~/.ssh/id_rsa.pub&lt;/code&gt; 查看的内容)。&lt;/p&gt;
+&lt;p&gt;注意：收集所有需要登录的用户的公钥，就是他们自己的 &lt;code&gt;id_rsa.pub&lt;/code&gt; 文件，把所有公钥导入到 &lt;code&gt;/home/git/.ssh/authorized_keys&lt;/code&gt; 文件里，一行一个。&lt;/p&gt;
+&lt;h3 id=&#34;用户组管理&#34;&gt;&lt;a href=&#34;#用户组管理&#34; class=&#34;headerlink&#34; title=&#34;用户组管理&#34;&gt;&lt;/a&gt;用户组管理&lt;/h3&gt;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;ll /home/git/
+ll /home/wwwroot/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;确保 &lt;code&gt;blog.git&lt;/code&gt;、&lt;code&gt;.ssh&lt;/code&gt;、&lt;code&gt;blog&lt;/code&gt; 目录的用户组权限为 &lt;code&gt;git:git&lt;/code&gt;，若不是，执行下列命令：&lt;/p&gt;
+&lt;p&gt;修改用户权限的命令：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# chown -R 用户名.组名 /目录
+chown -R git.git /home/git/blog.git/
+chown -R git.git /home/git/.ssh/
+chown -R git.git /home/wwwroot/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;安装配置 Nginx&lt;/p&gt;
+&lt;p&gt;由于我之前已经装过了nginx，nginx安装内容来源于网络，仅供参考。&lt;/p&gt;
+&lt;h3 id=&#34;安装-Nginx&#34;&gt;&lt;a href=&#34;#安装-Nginx&#34; class=&#34;headerlink&#34; title=&#34;安装 Nginx&#34;&gt;&lt;/a&gt;安装 Nginx&lt;/h3&gt;&lt;p&gt;执行：&lt;code&gt;apt-get install nginx&lt;/code&gt;，若输入 &lt;code&gt;nginx -V&lt;/code&gt; 可以看到 nginx 版本信息，则安装成功。&lt;/p&gt;
+&lt;h3 id=&#34;配置-nginx&#34;&gt;&lt;a href=&#34;#配置-nginx&#34; class=&#34;headerlink&#34; title=&#34;配置 nginx&#34;&gt;&lt;/a&gt;配置 nginx&lt;/h3&gt;&lt;p&gt;执行：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cd /etc/nginx/sites-available   //切换目录
+cp default default.bak          //备份默认配置
+vim default                     //修改配置
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;参考配置文件内容：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;server &amp;#123;
+    listen 80 default;              #默认监听80端口
+    root /home/wwwroot;             #网站根目录
+    server_name nightfury.top, www.nightfury.top;  #网址
+    access_log  /var/log/nginx/blog_access.log;
+    error_log   /var/log/nginx/blog_error.log;
+    error_page 404 =  /404.html;
+    
+    location ~* ^.+\.(ico|gif|jpg|jpeg|png)$ &amp;#123;
+        root /home/wwwroot;
+        access_log   off;
+        expires      1d;
+    &amp;#125;
+
+    location ~* ^.+\.(css|js|txt|xml|swf|wav)$ &amp;#123;
+        root /home/wwwroot;
+        access_log   off;
+        expires      10m;
+    &amp;#125;
+
+    location / &amp;#123;
+        root /home/wwwroot;
+        if (-f $request_filename) &amp;#123;
+        rewrite ^/(.*)$  /$1 break;
+        &amp;#125;
+    &amp;#125;
+
+    location /nginx_status &amp;#123;
+        stub_status on;
+        access_log off;
+    &amp;#125;
+&amp;#125;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;保存退出后，启动 nginx：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;systemctl start nginx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;设置开机自动启动：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;systemctl enable nginx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;查看运行状态：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;systemctl status nginx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;显示 running 表示成功运行。&lt;/p&gt;
+&lt;h2 id=&#34;配置-Git-Hooks&#34;&gt;&lt;a href=&#34;#配置-Git-Hooks&#34; class=&#34;headerlink&#34; title=&#34;配置 Git Hooks&#34;&gt;&lt;/a&gt;配置 Git Hooks&lt;/h2&gt;&lt;h3 id=&#34;创建-post-receive-文件&#34;&gt;&lt;a href=&#34;#创建-post-receive-文件&#34; class=&#34;headerlink&#34; title=&#34;创建 post-receive 文件&#34;&gt;&lt;/a&gt;创建 post-receive 文件&lt;/h3&gt;&lt;p&gt;git 用户下执行（这里我用 root 用户执行上述命令，然后更改了文件所有者为 git.git，就是&lt;code&gt;chown -R git:git post-receive&lt;/code&gt;）：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cd /home/git/blog.git/hooks  //切换到hooks目录下
+vim post-receive             //创建文件
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;复制下面的内容到 &lt;code&gt;post-receive&lt;/code&gt; 文件中：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;#!/bin/bash
+echo &amp;quot;post-receive hook is running...&amp;quot;
+
+GIT_REPO=/home/git/blog.git
+TMP_GIT_CLONE=/tmp/blog
+PUBLIC_WWW=/home/wwwroot
+
+rm -rf $&amp;#123;TMP_GIT_CLONE&amp;#125;
+git clone $GIT_REPO $TMP_GIT_CLONE
+rm -rf $&amp;#123;PUBLIC_WWW&amp;#125;/*
+cp -rf $&amp;#123;TMP_GIT_CLONE&amp;#125;/* $&amp;#123;PUBLIC_WWW&amp;#125;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;p&gt;为什么不直接将裸仓库克隆到 Web 根目录下呢？我之前也一直被这个问题困扰，感觉先克隆到 tmp 目录再拷贝到 Web 根目录是多此一举。后来我觉得可能是出于项目安全的考虑，在执行 cp 命令的时候，.git 作为隐藏目录不会被拷贝到 Web 根目录下，也就避免了将整个仓库历史暴露在 Web 服务中。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;赋予可执行权限：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;chmod +x post-receive
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;本地操作&#34;&gt;&lt;a href=&#34;#本地操作&#34; class=&#34;headerlink&#34; title=&#34;本地操作&#34;&gt;&lt;/a&gt;本地操作&lt;/h2&gt;&lt;h3 id=&#34;尝试连接&#34;&gt;&lt;a href=&#34;#尝试连接&#34; class=&#34;headerlink&#34; title=&#34;尝试连接&#34;&gt;&lt;/a&gt;尝试连接&lt;/h3&gt;&lt;p&gt;在本地打开 Git Bash：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;ssh git@VPS的ip
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;若默认端口不是 22，则需要在后面加上 -p 端口号：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;ssh git@VPS的ip -p 2022
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;返回结果应该如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;-&amp;gt;ssh git@nightfury.top
+-&amp;gt;Welcome to Ubuntu 18.04 LTS (GNU/Linux 4.14.129-bbrplus x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+ * Canonical Livepatch is available for installation.
+   - Reduce system reboots and improve kernel security. Activate at:
+     https://ubuntu.com/livepatch
+Last login: Mon Aug 14 15:56:58 2023 from 159.226.177.100
+fatal: Interactive git shell is not enabled.
+hint: ~/git-shell-commands should exist and have read and execute access.
+Connection to nightfury.top closed.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;提示无法登录 shell 是正常的，因为我们在之前就为 git 用户指定了 git-shell 每次一登录就自动退出。&lt;/p&gt;
+&lt;h2 id=&#34;配置-Hexo&#34;&gt;&lt;a href=&#34;#配置-Hexo&#34; class=&#34;headerlink&#34; title=&#34;配置 Hexo&#34;&gt;&lt;/a&gt;配置 Hexo&lt;/h2&gt;&lt;p&gt;打开本地博客根目录下的_config.yml 文件，找到最后的 deploy 配置，修改为：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;## Deployment
+
+## Docs: https://hexo.io/docs/deployment.html
+
+deploy:
+  - type: git
+    repo: git@github.com:szNightFury/szNightFury.github.io.git
+    branch: master
+  - type: git
+    repo: git@nightfury.top:/home/git/blog.git
+    branch: master
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;到此，Hexo 建站就全部配置部署完毕了。&lt;/p&gt;
+</content>
+        <category term="Configuration" scheme="https://nightfury.top/categories/Configuration/" />
+        <category term="Hexo" scheme="https://nightfury.top/tags/Hexo/" />
+        <category term="Github" scheme="https://nightfury.top/tags/Github/" />
+        <category term="Ubuntu" scheme="https://nightfury.top/tags/Ubuntu/" />
+        <updated>2023-08-14T07:17:08.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://nightfury.top/2023/08/13/Markdown%E5%9B%BE%E7%89%87%E9%85%8D%E7%BD%AE/</id>
+        <title>Markdown图片配置</title>
+        <link rel="alternate" href="https://nightfury.top/2023/08/13/Markdown%E5%9B%BE%E7%89%87%E9%85%8D%E7%BD%AE/"/>
+        <content type="html">&lt;h1 id=&#34;Hexo中插入图片的方案&#34;&gt;&lt;a href=&#34;#Hexo中插入图片的方案&#34; class=&#34;headerlink&#34; title=&#34;Hexo中插入图片的方案&#34;&gt;&lt;/a&gt;Hexo中插入图片的方案&lt;/h1&gt;&lt;p&gt;第一次使用 Hexo，对于 Markdown 中图片的处理不是很了解。由于 Markdown 中插入的图片多为本地或者网络链接的形式，而经过 Hexo 编译后，网页是不可能获取到本地图片，因此往往需要做额外的处理，经了解有以下几种方案：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用网络链接。这需要网上资源有你需要的图片，或者使用图床等手动上传，但该方法由于图片掌握在他人手上并不稳定&amp;#x2F;安全，因此果断抛弃。&lt;/li&gt;
+&lt;li&gt;使用 base64 编码的方案。因为 Markdown 最后都会生成 html，因此可以将原本的 &lt;code&gt;![image](image_path)&lt;/code&gt; 这种写法改成 &lt;code&gt;![image](data:image/png:base64,...)&lt;/code&gt;这种写法，这种写法不需要将图片存在任何除了这个文件以外的其它地方。但是，图片的 base64 编码非常之长，直接插入文件中间会影响 Markdown 编写过程中的美观。不过其实也可以使用间接的方法，在需要插入图片的地方写 &lt;code&gt;![image][reference_name]&lt;/code&gt;，在其他地方（最好是文章末尾）写 &lt;code&gt;[reference_name]:&amp;lt;base64&amp;gt;&lt;/code&gt;，但个人觉得这种方式还是不够优雅。&lt;/li&gt;
+&lt;li&gt;使用本地图片，同时上传至服务器。Hexo 本身提供了 &lt;a href=&#34;https://hexo.io/zh-cn/docs/asset-folders.html&#34;&gt;解决方案 &lt;/a&gt; ，需要配合 &lt;code&gt;hexo-asset-img&lt;/code&gt; 一同食用，该方案比较优雅，只需将图片保存到本地（配合 Typora），然后一键三连即可（后文附上一键三连代码）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;Hexo配置&#34;&gt;&lt;a href=&#34;#Hexo配置&#34; class=&#34;headerlink&#34; title=&#34;Hexo配置&#34;&gt;&lt;/a&gt;Hexo配置&lt;/h1&gt;&lt;p&gt;如 Hexo &lt;a href=&#34;https://hexo.io/zh-cn/docs/asset-folders.html&#34;&gt;官方文档&lt;/a&gt; 所说，我们首先对于 &lt;code&gt;_config.yml&lt;/code&gt; 文件中的 &lt;code&gt;post_asset_folder: false&lt;/code&gt; 改为 &lt;code&gt;true&lt;/code&gt;，然后安装 &lt;code&gt;hexo-asset-img&lt;/code&gt;（网上大多说是安装 &lt;code&gt;hexo-asset-image&lt;/code&gt;，但据了解似乎不支持 Hexo5，已经弃用较久了，自己也尝试安装过，发现只有使用 &lt;code&gt;&amp;#123;Picture Filename&amp;#125;&lt;/code&gt; 的形式才能在网页上正常显示，但在 Markdown 中却不行，需要使用 &lt;code&gt;&amp;#123;Markdown Title&amp;#125;/&amp;#123;Picture Filename&amp;#125;&lt;/code&gt; 的形式才能在编写过程中显示出来，这很不优雅。而 &lt;code&gt;hexo-asset-img&lt;/code&gt; 似乎是有个小伙对 &lt;code&gt;hexo-asset-image&lt;/code&gt; 进行了魔改，看了下代码主要还是正则化等一些字符串处理，路径在 &lt;code&gt;&amp;#123;Your Hexo Filepath&amp;#125;\node_modules\hexo-asset-img\index.js&lt;/code&gt; 中）&lt;/p&gt;
+&lt;p&gt;此时，通过 &lt;code&gt;hexo n &amp;quot;&amp;#123;Markdown Title&amp;#125;&amp;quot;&lt;/code&gt; 会自动创建一个 Markdown 文件和相同名字的文件夹，这时只需要将 Markdown 中的图片存入对应的文件夹中，同时调用时使用 &lt;code&gt;![&amp;#123;Picture Name&amp;#125;](&amp;#123;Markdown Title&amp;#125;/&amp;#123;Picture Filename&amp;#125;)&lt;/code&gt; 即可。注意，由于设置了 &lt;code&gt;post_asset_folder: true&lt;/code&gt;，原来的 &lt;code&gt;front-matter&lt;/code&gt; 中封面图片的根路径将从根目录 &lt;code&gt;.\source\&lt;/code&gt; 变成 &lt;code&gt;.\source\_posts\&amp;#123;Markdown Title&amp;#125;\&lt;/code&gt;，因此封面图片的路径直接使用 &lt;code&gt;&amp;#123;Cover Filename&amp;#125;&lt;/code&gt; 即可。&lt;/p&gt;
+&lt;h1 id=&#34;Typora配置&#34;&gt;&lt;a href=&#34;#Typora配置&#34; class=&#34;headerlink&#34; title=&#34;Typora配置&#34;&gt;&lt;/a&gt;Typora配置&lt;/h1&gt;&lt;p&gt;打开 Typora，依次点击 &lt;code&gt;文件 - 偏好设置 - 图像&lt;/code&gt;，设置插入图片时&lt;code&gt;复制到指定路径&lt;/code&gt;，图片文件保存路径为 &lt;code&gt;./$&amp;#123;filename&amp;#125;&lt;/code&gt; 即保存到与当前正在编辑的文件名相同的同级文件夹下，此时，无论是复制的本地图片还是截图的图片，可以直接粘贴进 Typora 中，Typora 将会自动把图片复制到指定位置，当然，可能还需要修改一下图片名以及图片文件名（如果是截图了话）&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/Markdown%E5%9B%BE%E7%89%87%E9%85%8D%E7%BD%AE/Typora%E9%85%8D%E7%BD%AE.png&#34; alt=&#34;Typora配置&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;Hexo一键三连代码&#34;&gt;&lt;a href=&#34;#Hexo一键三连代码&#34; class=&#34;headerlink&#34; title=&#34;Hexo一键三连代码&#34;&gt;&lt;/a&gt;Hexo一键三连代码&lt;/h1&gt;&lt;p&gt;将以下代码保存到 Hexo 根目录的 &lt;code&gt;update.ps1&lt;/code&gt; 文件中，然后用管理员权限打开 powershell，执行 &lt;code&gt;.\update.ps1&lt;/code&gt; 就会自动完成 &lt;code&gt;清理 - 编译 - 上传&lt;/code&gt; 一键三连（当然前提是已经配置好了 hexo d 所需要的一些环境以及 git 帐号等信息填写）。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;# 执行 hexo clean
+Write-Host &amp;quot;Cleaning Hexo...&amp;quot;
+hexo clean
+
+# 执行 hexo g
+Write-Host &amp;quot;Generating Hexo...&amp;quot;
+hexo g
+
+# 执行 hexo algolia（可选）
+Write-Host &amp;quot;Running Hexo Algolia...&amp;quot;
+hexo algolia
+
+# 执行 hexo d
+Write-Host &amp;quot;Deploying Hexo...&amp;quot;
+hexo d
+
+Write-Host &amp;quot;Done!&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+        <category term="Configuration" scheme="https://nightfury.top/categories/Configuration/" />
+        <category term="Hexo" scheme="https://nightfury.top/tags/Hexo/" />
+        <category term="Shoka" scheme="https://nightfury.top/tags/Shoka/" />
+        <category term="Markdown" scheme="https://nightfury.top/tags/Markdown/" />
+        <category term="Typora" scheme="https://nightfury.top/tags/Typora/" />
+        <updated>2023-08-13T12:38:10.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://nightfury.top/2023/08/13/Sbt%E7%BC%93%E5%AD%98%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE/</id>
+        <title>Sbt缓存目录配置</title>
+        <link rel="alternate" href="https://nightfury.top/2023/08/13/Sbt%E7%BC%93%E5%AD%98%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE/"/>
+        <content type="html">&lt;h1 id=&#34;Sbt文件迁移&#34;&gt;&lt;a href=&#34;#Sbt文件迁移&#34; class=&#34;headerlink&#34; title=&#34;Sbt文件迁移&#34;&gt;&lt;/a&gt;Sbt文件迁移&lt;/h1&gt;&lt;p&gt;Sbt 原来的缓存路径为 &lt;code&gt;C:\Users\&amp;#123;Your User Name&amp;#125;\AppData\Local&lt;/code&gt;，里面包含了 .sbt 和 .ivy2 文件夹，在这里我将其迁移至 &lt;code&gt;D:\sbt&lt;/code&gt; 路径下&lt;/p&gt;
+&lt;h1 id=&#34;IntelliJ-IDEA&#34;&gt;&lt;a href=&#34;#IntelliJ-IDEA&#34; class=&#34;headerlink&#34; title=&#34;IntelliJ IDEA&#34;&gt;&lt;/a&gt;IntelliJ IDEA&lt;/h1&gt;&lt;p&gt;打开 IntelliJ IDEA，依次点击 &lt;code&gt;File - Settings - Build, Execution, Deployment - sbt&lt;/code&gt;，在 &lt;code&gt;VM parameters&lt;/code&gt; 中输入：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;-Dsbt.boot.directionary=D:\sbt\.sbt\boot
+-Dsbt.global.base=D:\sbt\.sbt
+-Dsbt.ivy.home=D:\sbt\.ivy2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/Sbt%E7%BC%93%E5%AD%98%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE.png&#34; alt=&#34;sbt缓存目录配置&#34;&gt;&lt;/p&gt;
+&lt;p&gt;至此，sbt 的缓存文件将会保存在 D 盘中，但由于当初安装 sbt 时似乎选择在了 C 盘，因此如有需要还可以对 sbt 进行迁移（似乎安装在了 &lt;code&gt;C:\Users\&amp;#123;Your User Name&amp;#125;\AppData\Local\Coursier\cache\arc\https\github.com\sbt&lt;/code&gt; 中），等后面有时间了再处理吧。&lt;/p&gt;
+</content>
+        <category term="Configuration" scheme="https://nightfury.top/categories/Configuration/" />
+        <category term="IntelliJ IDEA" scheme="https://nightfury.top/tags/IntelliJ-IDEA/" />
+        <category term="Sbt" scheme="https://nightfury.top/tags/Sbt/" />
+        <updated>2023-08-13T10:17:24.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://nightfury.top/2023/07/27/m2sPipe%E4%B8%8Es2mPipe/</id>
+        <title>m2sPipe与s2mPipe</title>
+        <link rel="alternate" href="https://nightfury.top/2023/07/27/m2sPipe%E4%B8%8Es2mPipe/"/>
+        <content type="html">&lt;h1 id=&#34;s2mPipe&#34;&gt;&lt;a href=&#34;#s2mPipe&#34; class=&#34;headerlink&#34; title=&#34;s2mPipe&#34;&gt;&lt;/a&gt;s2mPipe&lt;/h1&gt;&lt;h2 id=&#34;关键点&#34;&gt;&lt;a href=&#34;#关键点&#34; class=&#34;headerlink&#34; title=&#34;关键点&#34;&gt;&lt;/a&gt;关键点&lt;/h2&gt;&lt;p&gt;self.ready为s2mPipe.ready打一拍，rValid和rData用于寄存输入valid和payload避免气泡。&lt;/p&gt;
+&lt;h2 id=&#34;开敲&#34;&gt;&lt;a href=&#34;#开敲&#34; class=&#34;headerlink&#34; title=&#34;开敲&#34;&gt;&lt;/a&gt;开敲&lt;/h2&gt;&lt;p&gt;如果有寄存数据，输出寄存数据；如果没有寄存数据，寄存数据 or 直接输出（视输出ready决定）&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val rData = RegNextWhen(self.payload, self.fire &amp;amp; ~s2mPipe.fire)
+val rValid = RegInit(False) setWhen(self.fire) clearWhen(s2mPipe.fire)
+val rReady = RegInit(True) setWhen(s2mPipe.ready) clearWhen(~s2mPipe.ready | rValid)
+
+
+self.ready := rReady
+s2mPipe.valid := self.valid | rValid
+s2mPipe.payload := Mux(rValid, rData, self.payload)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;修正1&lt;/strong&gt;：rData只有在rValid拉高时才用到，而rValid只有self.fire时才为高，因此&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val rData = RegNextWhen(self.payload, self.fire)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;修正2&lt;/strong&gt;：rValid说明是否包含寄存数据，rValid为高时说明无法再接收新寄存数据，这要求self.ready拉低，因为只能寄存-消化-直通 or 寄存-消化-寄存-消化 or 直通，即有寄存数据后只能消化，不能消化的同时寄存（因为rValid在消化的时候拉低了，就算寄存了rValid也为低，这与前面说法相违背，或者说这种情况应该是m2sPipe，因为payload和valid有一拍延时)，因此实际上self.ready只在没有寄存数据的时候才能为高，即&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;self.ready := ~rValid
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;修正3&lt;/strong&gt;：self.ready依赖于rValid，而rValid依赖self.fire，这形成了环路，存在问题. 实际上，rValid为高时，s2mPipe.valid为高，因此拉低条件s2mPipe.fire可以退化成s2mPipe.ready；而拉高条件self.fire &amp;amp; ~s2mPipe.ready是为了说明有数据寄存且没有消化，则原来的rValid为低，self.ready为高（self.ready :&amp;#x3D; ~rValid)，因此拉高条件退化为self.valid &amp;amp; ~s2mPipe.ready，则&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val rValid = RegInit(False) setWhen (self.valid) clearWhen(s2mPipe.ready)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;修正4&lt;/strong&gt;：rData的寄存条件self.fire较为严格，因为实际输出依赖rValid选择payload，而rValid是在self.valid时拉高，因此寄存条件self.fire &amp;#x3D; self.valid &amp;amp; self.ready可以退化为self.ready，则&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val rData = RegNextWhen(self.payload, self.ready)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;完整代码&#34;&gt;&lt;a href=&#34;#完整代码&#34; class=&#34;headerlink&#34; title=&#34;完整代码&#34;&gt;&lt;/a&gt;完整代码&lt;/h2&gt;&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val rData = RegNextWhen(self.payload, self.ready)
+val rValid = RegInit(False) setWhen(self.valid) clearWhen(s2mPipe.ready)
+
+self.ready := ~rValid
+s2mPipe.valid := self.valid | rValid
+s2mPipe.payload := Mux(rValid, rData, self.payload)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;补充&#34;&gt;&lt;a href=&#34;#补充&#34; class=&#34;headerlink&#34; title=&#34;补充&#34;&gt;&lt;/a&gt;补充&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;s2mPipe() is ready to accept new data when the internal data register does not contain valid data.&lt;/li&gt;
+&lt;li&gt;The ready becomes valid when rData is free, thus when it does not contain valid data already.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;m2sPipe&#34;&gt;&lt;a href=&#34;#m2sPipe&#34; class=&#34;headerlink&#34; title=&#34;m2sPipe&#34;&gt;&lt;/a&gt;m2sPipe&lt;/h1&gt;&lt;h2 id=&#34;关键点-1&#34;&gt;&lt;a href=&#34;#关键点-1&#34; class=&#34;headerlink&#34; title=&#34;关键点&#34;&gt;&lt;/a&gt;关键点&lt;/h2&gt;&lt;p&gt;rValid和rData寄存输入valid和payload, self.ready处理气泡拼接。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;开敲-1&#34;&gt;&lt;a href=&#34;#开敲-1&#34; class=&#34;headerlink&#34; title=&#34;开敲&#34;&gt;&lt;/a&gt;开敲&lt;/h2&gt;&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val rData = RegNextWhen(self.payload, self.ready)
+val rValid = RegNextWhen(self.valid, self.ready) init(False)
+
+self.ready := m2sPipe.ready | ~m2sPipe.valid	// m2sPipe.isFree
+m2sPipe.valid := rValid
+m2sPipe.payload := rData
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+        <category term="Technique" scheme="https://nightfury.top/categories/Technique/" />
+        <category term="FPGA" scheme="https://nightfury.top/tags/FPGA/" />
+        <category term="SpinalHDL" scheme="https://nightfury.top/tags/SpinalHDL/" />
+        <updated>2023-07-27T07:21:12.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://nightfury.top/2023/07/27/Php%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</id>
+        <title>Php环境配置</title>
+        <link rel="alternate" href="https://nightfury.top/2023/07/27/Php%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+        <content type="html">&lt;h1 id=&#34;实验环境&#34;&gt;&lt;a href=&#34;#实验环境&#34; class=&#34;headerlink&#34; title=&#34;实验环境&#34;&gt;&lt;/a&gt;实验环境&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;操作系统：Ubuntu 18.04&lt;/li&gt;
+&lt;li&gt;Nginx：1.20.1&lt;/li&gt;
+&lt;li&gt;PHP：7.2.24&lt;/li&gt;
+&lt;li&gt;PHP-fpm：php7.2-fpm&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;实验步骤&#34;&gt;&lt;a href=&#34;#实验步骤&#34; class=&#34;headerlink&#34; title=&#34;实验步骤&#34;&gt;&lt;/a&gt;实验步骤&lt;/h1&gt;&lt;h2 id=&#34;安装程序包与依赖&#34;&gt;&lt;a href=&#34;#安装程序包与依赖&#34; class=&#34;headerlink&#34; title=&#34;安装程序包与依赖&#34;&gt;&lt;/a&gt;安装程序包与依赖&lt;/h2&gt;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# 更新软件包列表
+apt update
+
+# 安装程序包
+apt install nginx
+apt install php php-fpm php-xml php-json php-curl
+
+# 安装常用依赖
+sudo apt-get install php-json
+sudo apt-get install php-curl
+sudo apt-get install php-hash
+sudo apt-get install php-openssl
+sudo apt-get install php7.2-cgi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;编辑fpm配置文件&#34;&gt;&lt;a href=&#34;#编辑fpm配置文件&#34; class=&#34;headerlink&#34; title=&#34;编辑fpm配置文件&#34;&gt;&lt;/a&gt;编辑fpm配置文件&lt;/h2&gt;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;sudo vim /etc/php/7.2/fpm/php.ini
+# 提升安全性
+# 修改参数如下：
+# 778行 ;cgi.fix_fathinfo=1 更改为 cgi.fix_fathinfo=0
+
+sudo vim /etc/php/7.2/fpm/pool.d/www.conf
+# 配置连接数量
+# 修改参数如下
+#  36行 listen = 127.0.0.1:9000 
+#  62行 listen.allowed_clients = 127.0.0.1
+# 113行 pm.max_children = 50
+# 139行 pm.max_requests = 500 
+# 340行 request_terminate_timeout = 0 
+# 344行 rlimit_files = 1024
+# 以上部分，包括但不限于去除前面的&amp;quot;;&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;配置Nginx&#34;&gt;&lt;a href=&#34;#配置Nginx&#34; class=&#34;headerlink&#34; title=&#34;配置Nginx&#34;&gt;&lt;/a&gt;配置Nginx&lt;/h2&gt;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;sudo vim /etc/nginx/conf/nginx.conf # 富强后用/etc/nginx/conf/conf.d/xxx.conf
+# 在index.html前面加入index.php
+# 增加：
+location ~ \.php$ &amp;#123;
+    root           /home/wwwroot/;
+    fastcgi_pass   127.0.0.1:9000;
+    fastcgi_split_path_info  ^(.+\.php)(.*)$;
+    fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    fastcgi_param  PATH_INFO $fastcgi_path_info;
+    include        fastcgi_params; # include fastcgi.conf;
+&amp;#125;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;fastcgi_params&lt;/code&gt; 和 &lt;code&gt;fastcgi.conf&lt;/code&gt; 的区别：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;include fastcgi.conf&lt;/strong&gt;： &lt;code&gt;include fastcgi.conf;&lt;/code&gt; 通常用于包含 Nginx 默认提供的 FastCGI 配置参数文件。这个文件包含了一些通用的 FastCGI 参数设置，如 fastcgi_param、fastcgi_pass 等。这些参数适用于大多数 FastCGI 应用程序，包括 PHP、Python、Ruby 等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;include fastcgi_params&lt;/strong&gt;： &lt;code&gt;include fastcgi_params;&lt;/code&gt; 同样也是包含 FastCGI 配置参数的指令，但它通常比 &lt;code&gt;fastcgi.conf&lt;/code&gt; 更加轻量级。&lt;code&gt;fastcgi_params&lt;/code&gt; 文件包含了一些常见的 FastCGI 参数设置，同时避免了一些可能会引起安全问题的参数设置，如 &lt;code&gt;SCRIPT_FILENAME&lt;/code&gt;、&lt;code&gt;PATH_TRANSLATED&lt;/code&gt; 等。这使得 &lt;code&gt;fastcgi_params&lt;/code&gt; 更适合用于共享主机环境或需要更严格安全设置的情况。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;总的来说，两者的区别在于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;fastcgi.conf&lt;/code&gt; 可能包含更多的参数设置，适用于更多类型的 FastCGI 应用程序，但可能包含一些较为宽松的安全设置。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;fastcgi_params&lt;/code&gt; 较为轻量，适用于较为安全和精简的配置需求，特别适合共享主机环境。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;重启服务&#34;&gt;&lt;a href=&#34;#重启服务&#34; class=&#34;headerlink&#34; title=&#34;重启服务&#34;&gt;&lt;/a&gt;重启服务&lt;/h2&gt;&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;sudo service php7.2-fpm restart # systemctl restart php7.2-fpm
+sudo service nginx restart # systemctl restart nginx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;验收&#34;&gt;&lt;a href=&#34;#验收&#34; class=&#34;headerlink&#34; title=&#34;验收&#34;&gt;&lt;/a&gt;验收&lt;/h1&gt;&lt;p&gt;编写任意 php 文件，比如说简单的有 index.php：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;h1&amp;gt;
+    &amp;lt;span&amp;gt; Hello, this is test page &amp;lt;/span&amp;gt;
+&amp;lt;/h1&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;或者 php 探针：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;&amp;lt;?php 
+	phpinfo(); 
+?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;访问该 php 地址，得到正确的返回结果。完结，Move On！&lt;/p&gt;
+</content>
+        <category term="Configuration" scheme="https://nightfury.top/categories/Configuration/" />
+        <category term="Php" scheme="https://nightfury.top/tags/Php/" />
+        <category term="Nginx" scheme="https://nightfury.top/tags/Nginx/" />
+        <category term="Ubuntu" scheme="https://nightfury.top/tags/Ubuntu/" />
+        <updated>2023-07-27T03:49:11.000Z</updated>
+    </entry>
+</feed>
