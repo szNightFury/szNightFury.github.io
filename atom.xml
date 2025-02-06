@@ -116,6 +116,7 @@ fi
 echo &amp;quot;删除测试证书...&amp;quot;
 rm -rf &amp;quot;$HOME/.acme.sh/$&amp;#123;main_domain&amp;#125;_ecc&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果机子只有 IPV6，则还需要加个参数&lt;code&gt;--listen-v6&lt;/code&gt;&lt;/p&gt;
 &lt;h4 id=&#34;11-申请正式证书&#34;&gt;&lt;a href=&#34;#11-申请正式证书&#34; class=&#34;headerlink&#34; title=&#34;11. 申请正式证书&#34;&gt;&lt;/a&gt;11. 申请正式证书&lt;/h4&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;echo &amp;quot;申请正式证书...&amp;quot;
 ~/.acme.sh/acme.sh --issue $domain_args --standalone -k ec-256 --force
 if [ $? -ne 0 ]; then
@@ -123,6 +124,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;同理，如果机子只有 IPV6，同样需要加个参数&lt;code&gt;--listen-v6&lt;/code&gt;&lt;/p&gt;
 &lt;h4 id=&#34;12-安装证书&#34;&gt;&lt;a href=&#34;#12-安装证书&#34; class=&#34;headerlink&#34; title=&#34;12. 安装证书&#34;&gt;&lt;/a&gt;12. 安装证书&lt;/h4&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;echo &amp;quot;创建证书存储目录...&amp;quot;
 mkdir -p /etc/cert
 
